@@ -15,10 +15,10 @@ using vll = vector<ll>;
 int main() {
 	
 	int n;
-	cin >> n; 					//cantidad de pedidos disponibles
+	cin >> n; 					// n = cantidad de pedidos disponibles
 
 	int w;
-	cin >> w;					//capacidad del comprador
+	cin >> w;					// w = capacidad del comprador
 
 
 	
