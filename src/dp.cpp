@@ -25,7 +25,8 @@ int main() {
 	for(int i = 0; i < n; i++)			// obtengo los valores wi, pi
 	{	
 		cin>>wi>>pi;
-		ped
+		pedidos[i] = make_pair(wi, pi);
+	}
 
 	
 	return 0;
