@@ -15,12 +15,17 @@ using vll = vector<ll>;
 
 int main() {
 	
-	int n;
-	cin >> n; 					//cantidad de pedidos disponibles
+	ll n, w;							// w = capacidad del comprador
+	cin >> n >> w; 						// n = cantidad de pedidos disponibles
 
-	int w;
-	cin >> w;					//capacidad del comprador
+	vector<pll> pedidos(n);				// vector con los valores wi, pi
+	
+	ll wi, pi, maxPi;	
 
+	for(int i = 0; i < n; i++)			// obtengo los valores wi, pi
+	{	
+		cin>>wi>>pi;
+		ped
 
 	
 	return 0;
