@@ -9,6 +9,9 @@
 *.o
 *.obj
 src/fuerzaBruta
+src/backtraking
+src/meetInTheMiddle
+src/dp
 
 # Precompiled Headers
 *.gch
