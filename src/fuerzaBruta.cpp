@@ -12,7 +12,7 @@ using pll = pair<ll,ll>;
 using vi = vector<int>;
 using vll = vector<ll>;
 
-bool compPi(pll a, pll b) 				// funcion de comparacion para max_element
+bool compPi(pll &a, pll &b) 				// funcion de comparacion para max_element
 { 
     return (a.second < b.second); 
 }
