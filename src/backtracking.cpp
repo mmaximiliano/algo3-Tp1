@@ -45,13 +45,14 @@ void solveBacktracking(pll& res, pll& parcial, int indice)
 
 
 //CON PODAS
-void solveBacktrackingPodas(pll& res, pll& parcial, int indice)
+void solveBacktrackingPodas(pll& res, pll& parcial, int indice, ll b_total)
 {
 	for(int i = indice; i < pedidos.size(); i++)
 	{
 		//incluyo pedidos[i] en la solucion
 		parcial.first += pedidos[i].first;
 		parcial.second += pedidos[i].second;
+		b_total -= pedidos[i].second;
 
 
 		if(parcial.first <= w && parcial.second > res.second || parcial.second == res.second && parcial.first < res.first)
@@ -63,7 +64,9 @@ void solveBacktrackingPodas(pll& res, pll& parcial, int indice)
 
 		//pasamos al proximo elemento
 		//poda por factibilidad. Solo llamamos si el peso parcial es menor al limite
-		if(parcial.first < w) solveBacktrackingPodas(res, parcial, i+1);
+		//poda por optimalidad. Si no puedo llegar a sumar el mejor beneficio parcial, no sigo.
+		if(parcial.first < w && parcial.second+b_total > res.second)
+			solveBacktrackingPodas(res, parcial, i+1, b_total);
 
 		//excluimos pedidos[i] de la solucion
 		parcial.first -= pedidos[i].first;
@@ -83,17 +86,20 @@ int main() {
 
 	cin >> w;					//capacidad del comprador
 
+	ll b_total = 0;		//guardo el beneficio total para la poda por optimalidad
+
 	for(int i = 0; i < n; i++)
 	{
 		ll wi, pi;
 		cin>>wi>>pi;
+		b_total += pi;
 		pedidos.push_back(make_pair(wi, pi));
 	}
 
 
 	pll inicial = make_pair(0,0);
 	pll res = inicial;
-	solveBacktrackingPodas(res, inicial, 0);
+	solveBacktrackingPodas(res, inicial, 0, b_total);
 
 	cout<<res.second<<'\n';
 
