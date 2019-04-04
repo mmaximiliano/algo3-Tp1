@@ -1,3 +1,42 @@
 \section{Desarrollo}
 \label{sec:desarrollo}
 
+\subsection{Algoritmo de Fuerza Bruta}
+
+En ciencias de la computación, la técnica de búsqueda por fuerza bruta o búsqueda exhaustiva, también conocida como generate and test (generar y probar), es una forma muy general de resolver problemas y un paradigma de algoritmos que consiste en enumerar sistemáticamente todos los posibles candidatos a ser solución y luego chequear si cada candidato satisface o no el enunciado del problema. (referencia a wiki)
+
+En nuestro problema "Problema de la Mochila (Gloppi Ya)"  dado un conjunto de pedidos con un peso y beneficio asociado y una mochila de capacidad fija, la solución consiste en el subconjunto de pedidos que maximice la suma de beneficios y a su vez no supere la capacidad de la mochila. 
+
+Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibles soluciones al problema y luego chequear si satisfacen el enunciado. Para ello, generaremos todos los subconjuntos de pedidos (posibles soluciones) y luego nos quedaremos con aquel que maximice la suma de beneficios y a su vez quepa en la mochila.
+
+
+\begin{algorithm}
+\caption{Fuerza Bruta}\label{selection}
+\begin{algorithmic}[1]
+\Procedure{bruteForce}{$vector \ \ pedidos, \ int \ \ w$}
+	\State $vector \ subSets$
+   \For{\textbf{$i \gets 1$ to} $2^{|pedidos|}$}
+   	\State $wi \gets 0$
+	\State $pi \gets 0$
+    \For{\textbf{$j \gets 0$ to} $|pedidos|$}
+    \If{$j-esimo\ bit\ de\ i\ esta\ en\ 1$}
+    	\State $wi \gets wi\ +\ pedidos[j].beneficio$
+	\State $pi \gets pi\ +\ pedidos[j].peso$
+	\EndIf
+	\EndFor
+	
+	\If{$wi \ > \ w$}
+	\State $pi \gets -1$
+	\EndIf    
+    
+	\State $subSets[i] \gets pi $  
+    \EndFor
+   	\State $Return \ \ maxElement(subSets)$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos para crear un subconjunto que los contenga y sea una posible solución.
+\subsection*{Análisis de Complejidad}
+
