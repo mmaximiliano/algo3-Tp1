@@ -5,7 +5,7 @@
 
 En ciencias de la computación, la técnica de búsqueda por fuerza bruta o búsqueda exhaustiva, también conocida como generate and test (generar y probar), es una forma muy general de resolver problemas y un paradigma de algoritmos que consiste en enumerar sistemáticamente todos los posibles candidatos a ser solución y luego chequear si cada candidato satisface o no el enunciado del problema. (referencia a wiki)
 
-En nuestro problema "Problema de la Mochila (Gloppi Ya)"  dado un conjunto de pedidos con un peso y beneficio asociado y una mochila de capacidad fija, la solución consiste en el subconjunto de pedidos que maximice la suma de beneficios y a su vez no supere la capacidad de la mochila. 
+En nuestro problema "Problema de la Mochila (Gloppi Ya)"  dado un conjunto de pedidos con un peso y beneficio asociado y una mochila de capacidad fija, la solución consiste en el subconjunto de pedidos que maximice la suma de beneficios y a su vez no supere la capacidad de la mochila.
 
 Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibles soluciones al problema y luego chequear si satisfacen el enunciado. Para ello, generaremos todos los subconjuntos de pedidos (posibles soluciones) y luego nos quedaremos con aquel que maximice la suma de beneficios y a su vez quepa en la mochila.
 
@@ -24,12 +24,12 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 	\State $pi \gets pi\ +\ pedidos[j].peso$
 	\EndIf
 	\EndFor
-	
+
 	\If{$wi \ > \ w$}
 	\State $pi \gets -1$
-	\EndIf    
-    
-	\State $subSets[i] \gets pi $  
+	\EndIf
+
+	\State $subSets[i] \gets pi $
     \EndFor
    	\State $Return \ \ maxElement(subSets)$
 \EndProcedure
@@ -38,6 +38,40 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 
 
 Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi) y sea una posible solución. Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ "eliminando la solución", caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
- 
+
 \subsection*{Análisis de Complejidad}
 
+
+\subsection{Algoritmo Meet in the Middle}
+
+La técnica de Meet in the Middle nos permite partir el problema en dos partes de tamaño similar, y luego combinar sus resultados de manera eficiente.
+El esquema general de esta técnica es el siguiente:
+
+\begin{enumerate}
+\item Partir el problema en dos partes del mismo tamaño.
+\item Resolver cada parte por separado, utilizando la técnica de fuerza bruta.
+\item Combinar los resultados.
+\item Devolver el resultado.
+\end{enumerate}
+
+Notemos que si queremos obtener una buena complejidad usando esta técnica, el paso 3) es dónde debemos detenernos con más cuidado. Si no combinamos cuidadosamente los resultados, podríamos obtener una complejidad peor que con fuerza bruta.
+Veamos como se aplica éste esquema a nuestro problema:
+
+\begin{enumerate}
+\item Separamos todos nuestros elementos en 2 mitades.
+\item Para cada mitad, calculamos los pesos y beneficios de todos los subconjuntos posibles.
+\item Para cada subconjunto de la primera mitad, buscamos el subconjunto de la segunda mitad tal que se maximize nuestro beneficio.
+\item Devolvemos el par con mayor beneficio.
+\end{enumerate}
+
+Detengamonos en el paso 3) y veamos la complejidad de éste algoritmo. Sabemos que calcular todos los subconjuntos de un conjunto de cardinal n cuesta O($2^{n}$). En nuestro caso, tenemos dos subconjuntos de cardinal n/2, por lo que la complejidad de los primeros dos pasos es de O($2^{n/2}$). \\
+Para implementar el paso 3) hacemos lo siguiente:
+\begin{itemize}
+\item Ordenamos la segunda mitad según su peso de menor a mayor, y según su beneficio de mayor a menor. Esto tiene una complejidad de O($2^{n/2} * log(2^{n/2})$) = O($2^{n/2} * n/2$).
+\item Filtramos la segunda mitad, descartando todos los subconjuntos cuyo peso es mayor al de otros con beneficio mayor o igual. Debido a como ordenamos la segunda mitad, podemos filtrarla en orden lineal, es decir, O($2^{n/2}$).
+\item Usamos búsqueda binaria para aparear subconjuntos de cada mitad. La complejidad de esto es la de hacer una búsqueda binaria en un arreglo de tamaño $2^{n/2}$ para $2^{n/2}$ elementos, es decir, O($2^{n/2} * log(2^{n/2})$) = O(2^{n/2} * n/2).
+\end{itemize}
+
+\bigskip
+
+Por lo tanto, vemos que la complejidad total del algoritmo es de O(2^{n/2} * n).
