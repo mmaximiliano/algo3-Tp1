@@ -3,7 +3,7 @@
 
 \subsection{Algoritmo de Fuerza Bruta}
 
-En ciencias de la computación, la técnica de búsqueda por fuerza bruta o búsqueda exhaustiva, también conocida como generate and test (generar y probar), es una forma muy general de resolver problemas y un paradigma de algoritmos que consiste en enumerar sistemáticamente todos los posibles candidatos a ser solución y luego chequear si cada candidato satisface o no el enunciado del problema. (referencia a wiki)
+En ciencias de la computación, la técnica de búsqueda por fuerza bruta o búsqueda exhaustiva, también conocida como generate and test (generar y probar), es una forma muy general de resolver problemas y un paradigma de algoritmos que consiste en enumerar sistemáticamente todos los posibles candidatos a ser solución y luego chequear si cada candidato satisface o no el enunciado del problema. \footnote{$https://es.wikipedia.org/wiki/B\%C3\%BAsqueda\_de\_fuerza\_bruta$}
 
 En nuestro problema "Problema de la Mochila (Gloppi Ya)"  dado un conjunto de pedidos con un peso y beneficio asociado y una mochila de capacidad fija, la solución consiste en el subconjunto de pedidos que maximice la suma de beneficios y a su vez no supere la capacidad de la mochila.
 
@@ -37,9 +37,19 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 \end{algorithm}
 
 
-Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi) y sea una posible solución. Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ "eliminando la solución", caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
+Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi) y sea una posible solución. Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ (eliminando la solución), caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
 
 \subsection*{Análisis de Complejidad}
+Describiremos cada acción con su complejidad y luego realizaremos la suma total.
+
+
+Complejidad de calcular la suma de todos los elementos de los $2^{n}$ posibles subconjuntos de pedidos que pueden llegar a ser a lo sumo de longitud n = O($n*2^{n}$).
+
+
+Complejidad de algunos checkeos y comparaciones de cantidades = O(1).
+
+ 
+Complejidad Total del algoritmo = O($n*2^{n}$).
 
 
 \subsection{Algoritmo Meet in the Middle}
@@ -69,9 +79,70 @@ Para implementar el paso 3) hacemos lo siguiente:
 \begin{itemize}
 \item Ordenamos la segunda mitad según su peso de menor a mayor, y según su beneficio de mayor a menor. Esto tiene una complejidad de O($2^{n/2} * log(2^{n/2})$) = O($2^{n/2} * n/2$).
 \item Filtramos la segunda mitad, descartando todos los subconjuntos cuyo peso es mayor al de otros con beneficio mayor o igual. Debido a como ordenamos la segunda mitad, podemos filtrarla en orden lineal, es decir, O($2^{n/2}$).
-\item Usamos búsqueda binaria para aparear subconjuntos de cada mitad. La complejidad de esto es la de hacer una búsqueda binaria en un arreglo de tamaño $2^{n/2}$ para $2^{n/2}$ elementos, es decir, O($2^{n/2} * log(2^{n/2})$) = O(2^{n/2} * n/2).
+\item Usamos búsqueda binaria para aparear subconjuntos de cada mitad. La complejidad de esto es la de hacer una búsqueda binaria en un arreglo de tamaño $2^{n/2}$ para $2^{n/2}$ elementos, es decir, O($2^{n/2} * log(2^{n/2})$) = O($2^{n/2} * n/2$).
 \end{itemize}
 
 \bigskip
 
-Por lo tanto, vemos que la complejidad total del algoritmo es de O(2^{n/2} * n).
+Por lo tanto, vemos que la complejidad total del algoritmo es de O($2^{n/2} * n$).
+
+\subsection{Algoritmo de Programación Dinámica}
+La programación dinámica es un método para reducir el tiempo de ejecución de un algoritmo mediante la utilización de subproblemas superpuestos y subestructuras óptimas\footnote{Una subestructura óptima significa que se pueden usar soluciones óptimas de subproblemas para encontrar la solución óptima del problema en su conjunto.}.
+ 
+
+En general, se pueden resolver problemas con subestructuras óptimas siguiendo estos tres pasos:
+\begin{itemize}
+	\item Dividir el problema en subproblemas más pequeños.
+	\item Resolver estos problemas de manera óptima usando este proceso de tres pasos recursivamente.
+	\item Usar estas soluciones óptimas para construir una solución óptima al problema original.
+\end{itemize}
+Los subproblemas se resuelven a su vez dividiéndolos en subproblemas más pequeños hasta que se alcance el caso base, donde la solución al problema es trivial.
+
+
+En resumen, la programación dinámica hace uso de:
+\begin{itemize}
+	\item Subproblemas superpuestos
+	\item Subestructuras óptimas
+	\item Memoización (almacenar los resultados obtenidos para no recalcularlos)
+\end{itemize}
+
+
+Ademas, la programación dinámica toma normalmente uno de los dos siguientes enfoques:
+\begin{itemize}
+	\item Top-down: El problema se divide en subproblemas, y estos se resuelven recordando las soluciones por si fueran necesarias nuevamente. Es una combinación de memoización y recursión.
+	\item Bottom-up: Todos los problemas que puedan ser necesarios se resuelven de antemano y después se usan para resolver las soluciones a problemas mayores. Este enfoque es ligeramente mejor en consumo de espacio y llamadas a funciones, pero a veces resulta poco intuitivo encontrar todos los subproblemas necesarios para resolver un problema dado.
+\end{itemize}
+
+Para nuestro problema en particular podemos plantear la siguiente función matemática recursiva:
+\begin{equation*}
+f(i,j) = \begin{cases} 
+          0 & i = 0 \lor j = 0 \\
+          max(f(i-1,j), beneficio[i-1] + f(i-1, j-peso[i-1])) & peso[i-1] \leq j \\
+          f(i-1, j) & en\ otro\ caso 
+       \end{cases}
+\end{equation*}
+
+\begin{algorithm}
+\caption{Programacion Dinamica}\label{selection}
+\begin{algorithmic}[1]
+\Procedure{dp}{$vector \ \ pedidos, \ int \ \ w$}
+	\State $int \ dp[n+1][w+1]$
+   \For{\textbf{$i \gets 0$ to} $|pedidos|$}
+    \For{\textbf{$j \gets 0$ to} $w$}
+    \If{$i = 0\ \ j=0$}
+    	\State $dp[i][j] \gets 0$
+	\State $pi \gets pi\ +\ pedidos[j].peso$
+	\EndIf
+	\EndFor
+
+	\If{$wi \ > \ w$}
+	\State $pi \gets -1$
+	\EndIf
+
+	\State $subSets[i] \gets pi $
+    \EndFor
+   	\State $Return \ \ maxElement(subSets)$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
