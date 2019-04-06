@@ -178,7 +178,7 @@ Por ultimo, en el caso en que el pedido i-ésimo no quepa en la mochila, llamamo
 
 
 \newpage
-Exhibimos el algoritmo propuesto para mostrar como hacemos uso de la técnica de memoizacion y no tener que recalcular valores anteriormente calculados.
+Exhibimos el algoritmo propuesto basado en el enfoque bottom-up para mostrar como hacemos uso de la técnica de memoizacion y no tener que recalcular valores anteriormente calculados.
 
 \begin{algorithm}
 \caption{Programacion Dinamica}\label{selection}
@@ -187,7 +187,7 @@ Exhibimos el algoritmo propuesto para mostrar como hacemos uso de la técnica de
 	\State $int \ dp[n+1][w+1]$
    	\For{\textbf{$i \gets 0$ to} $|pedidos|$}
     		\For{\textbf{$j \gets 0$ to} $w$}
-    			\If{$i = 0\ \ j=0$}
+    			\If{$i = 0\ \lor \ j=0$}
     				\State $dp[i][j] \gets 0$
     			
     			\Else
@@ -204,8 +204,6 @@ Exhibimos el algoritmo propuesto para mostrar como hacemos uso de la técnica de
 \end{algorithmic}
 \end{algorithm}
 
-%				if(pedidos[i-1].first <= j){
-%					dp[i][j] = max(dp[i-1][j], pedidos[i-1].second + dp[i-1][j-pedidos[i-1].first]);
-%				}else{
-%					dp[i][j] = dp[i-1][j];
-%				}
+\subsection*{Análisis de Complejidad}
+Al iniciar nuestro algoritmo creamos una matriz de $nxw$ lo que nos da una complejidad de $O(nxw)$
+Luego, podemos ver en el algoritmo que tenemos dos ciclos for anidados, uno que cicla desde 0 hasta n (la cantidad de pedidos) y otro que cicla desde 0 hasta w (el peso de la mochila). Estos ciclos sirven para ir recorriendo nuestra matriz de $nxw$, en donde cada para cada valor de la matriz que no este calculado, este se calcula una única vez y luego se accede al mismo en $O(1)$ para posteriores accesos. Para calcular el mismo, solo se requiere elementos que ya se encuentran calculados debido a la manera en la que recorremos la matriz, por lo tanto se toma el máximo entre ambos.
