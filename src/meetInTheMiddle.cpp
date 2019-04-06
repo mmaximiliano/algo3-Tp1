@@ -96,7 +96,7 @@ ll solveMiddle(vector<pll>& T1, vector<pll>& T2, ll& w)
 		}
 		else
 		{
-			ll beneficio = 0;//binarySearch(T2, complemento);
+			ll beneficio = binarySearch(T2, complemento);
 			beneficio += T1[i].second;
 			if(beneficio > res) res = beneficio;
 		}
