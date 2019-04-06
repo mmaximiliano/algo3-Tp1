@@ -164,12 +164,18 @@ f(i,j) = "el\ maximo\ beneficio\ obtenible\ dados\ i\ pedidos\ (con\ su\ respect
 
 Nuestra función nos dice que el caso base es cuando tenemos 0 pedidos y una mochila de capacidad 0, por lo tanto el máximo beneficio obtenible es 0.
 
-Sino, tenemos dos caminos:
+Sino, tenemos dos caminos a considerar (previo a realizar el llamado recursivo):
 \begin{enumerate}
 	\item agregamos el pedido i-ésimo a la mochila si es que este cabe en la misma
-	\item no agregamos el pedido i-ésimo a la mochila
+	\item no agregamos el pedido i-ésimo a la mochila por mas que este quepa en la mochila
 \end{enumerate}
+
+
 Como a nosotros nos interesa el beneficio máximo, tomaremos aquel camino que nos maximice el beneficio (motivo por el cual tomamos el máximo).
+
+
+Por ultimo, en el caso en que el pedido i-ésimo no quepa en la mochila, llamamos directamente al paso recursivo sin incluir al pedido i-ésimo.
+
 
 Exhibimos el algoritmo propuesto para mostrar como hacemos uso de la técnica de memoizacion y no tener que recalcular valores anteriormente calculados.
 
