@@ -48,8 +48,46 @@ Complejidad de calcular la suma de todos los elementos de los $2^{n}$ posibles s
 
 Complejidad de algunos checkeos y comparaciones de cantidades = O(1).
 
- 
+
 Complejidad Total del algoritmo = O($n*2^{n}$).
+
+\subsection{Backtracking}
+
+Backtracking es una técnica algorítmica que se encarga de encontrar todas las soluciones a un problema, construyendo de a pasos los candidatos a la solución. La ventaja por sobre los algoritmos de fuerza bruta proviene de que podemos eliminar un gran número de candidatos con un único test utilizando podas. Las mismas nos permiten determinar cuándo debemos abandonar a un candidato y que no es posible que alcancen una solución del problema.
+
+Para aplicar backtracking a nuestro problema, lo que notamos es que dado un elemento, una solución puede contenerlo o no. De esta manera, queremos construir nuestro árbol de recurrencias (o árbol de backtracking) en dónde en el paso i, o bien incluímos al i-ésimo elemento en la solución parcial o bien lo excluímos. Esto nos lleva a generar un árbol que contiene a todos los subconjuntos posibles.
+
+El siguiente pseudocódigo muestra como podemos obtener ésto facilmente:
+
+\begin{algorithm}
+\caption{Backtracking}\label{selection}
+\begin{algorithmic}[1]
+\Procedure{backtracking}{$pair \ \ res, \ pair \ \ parcial, \ int \ \ indice$}
+   \For{\textbf{$i \gets indice$ to} $|pedidos|$}
+   	\State $parcial.w \gets parcial.w + pedidos[i].w$
+	  \State $parcial.b \gets parcial.b + pedidos[i].b$
+    \If{parcial es mejor que res}
+    \State $res \gets parcial$
+    \EndIf
+    \State Backtracking(res, parcial, i+1)
+    \State $parcial.w \gets parcial.w - pedidos[i].w$
+	  \State $parcial.b \gets parcial.b - pedidos[i].b$
+
+	 \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Analicemos la complejidad de éste algortimo. Como mencionamos antes, para cada elemento tenemos la decisión de incluirlo o no en nuestra solución parcial. Ésto nos lleva a obtener un árbol binario completo de altura igual a la cantidad de elementos. En otras palabras, tenemos $2^{n}$ caminos de longitud n. Para armar cada camino, fuimos agregando nodos con un costo de O(1), lo que deriva en un costo total de O($2^{n} * n$) para armar todo el árbol de backtracking.
+
+Sin embargo, ésta implementación no aprovecha el uso de podas para poder descartar rápidamente un conjunto de candidatos que no pueden ser la solución final. Para mejorar sobre ésto, vamos a utilizar dos tipos de podas:
+
+\begin{itemize}
+\item Poda por factibilidad: éste tipo de podas consiste en descartar una solución parcial que sin importar como continúe su recorrido, no puede cumplir con las condiciones necesarias para ser solución del problema. En nuestro caso, nos fijamos que si un subconjunto tiene un peso mayor al límite W, ya no tiene sentido seguir con el recorrido. Esto nos dejar sin explorar todo el subárbol del candidato podado. Ésta técnica podría ser particularmente útil si los elementos nos viniesen ordenados de mayor a menor por su peso. Así, las soluciones que se pasan del límite W lo harían en menos pasos, permitiendonos podar más candidatos.
+\item Poda por optimalidad: Cuando no solo importa obtener una solución, si no que buscamos una solución óptima, podemos aplicar éste tipo de podas. Si estamos construyendo un candidato que no tiene posibilidades de ser mejor que la mejor solución encontrada hasta ahora, detenemos el recorrido. En nuestro problema, podemos aplicar una poda de éste tipo sabiendo en cada paso, cuál es el beneficio máximo que podemos agregar a nuestra solución. Si incluso sumando todo ese beneficio no podemos llegar al de nuestra mejor solución, nos detenemos.
+\end{itemize}
+
+Notemos que ninguna de estas podas agrega complejidad a nuestro algoritmo original. Para implementar la poda por factibilidad, alcanza con hacer un chequeo de si nuestro peso parcial es mayor al límite W antes de hacer el llamado recursivo. Por otro lado, si mantenemos una variable con la suma de los beneficios de todos los elementos que aún no visitamos, alcanza con que realizemos otro chequeo antes del llamado recursivo, y que vayamos decrementando el beneficio total en cada paso. Cada una de estas cosas tiene una complejidad de O(1).
 
 
 \subsection{Algoritmo Meet in the Middle}
@@ -88,7 +126,7 @@ Por lo tanto, vemos que la complejidad total del algoritmo es de O($2^{n/2} * n$
 
 \subsection{Algoritmo de Programación Dinámica}
 La programación dinámica es un método para reducir el tiempo de ejecución de un algoritmo mediante la utilización de subproblemas superpuestos y subestructuras óptimas\footnote{Una subestructura óptima significa que se pueden usar soluciones óptimas de subproblemas para encontrar la solución óptima del problema en su conjunto.}.
- 
+
 
 En general, se pueden resolver problemas con subestructuras óptimas siguiendo estos tres pasos:
 \begin{itemize}
@@ -115,10 +153,10 @@ Ademas, la programación dinámica toma normalmente uno de los dos siguientes en
 
 Para nuestro problema en particular podemos plantear la siguiente función matemática recursiva:
 \begin{equation*}
-f(i,j) = \begin{cases} 
+f(i,j) = \begin{cases}
           0 & i = 0 \lor j = 0 \\
           max(f(i-1,j), beneficio[i-1] + f(i-1, j-peso[i-1])) & peso[i-1] \leq j \\
-          f(i-1, j) & en\ otro\ caso 
+          f(i-1, j) & en\ otro\ caso
        \end{cases}
 \end{equation*}
 
@@ -145,4 +183,3 @@ f(i,j) = \begin{cases}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-
