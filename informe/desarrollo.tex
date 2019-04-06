@@ -150,9 +150,9 @@ Ademas, la programación dinámica toma normalmente uno de los dos siguientes en
 
 Para nuestro problema en particular podemos plantear la siguiente función matemática recursiva:
 
-\begin{equation*}
-f(i,j) = "el\ maximo\ beneficio\ obtenible\ dados\ i\ pedidos\ (con\ su\ respectivo\ peso\ y\ beneficio)\ y\ una\ mochila\ con\ capacidad\ j"
-\end{equation*}
+
+$f(i,j) =$ el maximo beneficio obtenible dados i pedidos (con su respectivo peso y beneficio) y una mochila con capacidad j
+
 
 \begin{equation*}
 	f(i,j) = \begin{cases} 
@@ -166,8 +166,8 @@ Nuestra función nos dice que el caso base es cuando tenemos 0 pedidos y una moc
 
 Sino, tenemos dos caminos a considerar (previo a realizar el llamado recursivo):
 \begin{enumerate}
-	\item agregamos el pedido i-ésimo a la mochila si es que este cabe en la misma
-	\item no agregamos el pedido i-ésimo a la mochila por mas que este quepa en la mochila
+	\item Agregamos el pedido i-ésimo a la mochila si es que este cabe en la misma
+	\item No agregamos el pedido i-ésimo a la mochila por mas que este quepa en la mochila
 \end{enumerate}
 
 
@@ -177,6 +177,7 @@ Como a nosotros nos interesa el beneficio máximo, tomaremos aquel camino que no
 Por ultimo, en el caso en que el pedido i-ésimo no quepa en la mochila, llamamos directamente al paso recursivo sin incluir al pedido i-ésimo.
 
 
+\newpage
 Exhibimos el algoritmo propuesto para mostrar como hacemos uso de la técnica de memoizacion y no tener que recalcular valores anteriormente calculados.
 
 \begin{algorithm}
