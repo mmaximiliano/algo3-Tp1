@@ -88,7 +88,6 @@ ll solveMiddle(vector<pll>& T1, vector<pll>& T2, ll& w)
 
 	T2 = filtrar(T2);			//filtramos los subcjtos de T2 que pesan mas que otros de valor mayor o igual
 
-
 	for(int i = 0; i < T1.size(); i++){
 		ll complemento = w-T1[i].first;
 		if(complemento <= 0)
@@ -97,11 +96,12 @@ ll solveMiddle(vector<pll>& T1, vector<pll>& T2, ll& w)
 		}
 		else
 		{
-			ll beneficio = binarySearch(T2, complemento);
+			ll beneficio = 0;//binarySearch(T2, complemento);
 			beneficio += T1[i].second;
 			if(beneficio > res) res = beneficio;
 		}
 	}
+
 
 	return res;
 }
