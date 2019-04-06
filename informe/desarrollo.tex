@@ -162,6 +162,15 @@ f(i,j) = "el\ maximo\ beneficio\ obtenible\ dados\ i\ pedidos\ (con\ su\ respect
        \end{cases}
 \end{equation*}
 
+Nuestra función nos dice que el caso base es cuando tenemos 0 pedidos y una mochila de capacidad 0, por lo tanto el máximo beneficio obtenible es 0.
+
+Sino, tenemos dos caminos:
+\begin{enumerate}
+	\item agregamos el pedido i-ésimo a la mochila si es que este cabe en la misma
+	\item no agregamos el pedido i-ésimo a la mochila
+\end{enumerate}
+Como a nosotros nos interesa el beneficio máximo, tomaremos aquel camino que nos maximice el beneficio (motivo por el cual tomamos el máximo).
+
 Exhibimos el algoritmo propuesto para mostrar como hacemos uso de la técnica de memoizacion y no tener que recalcular valores anteriormente calculados.
 
 \begin{algorithm}
