@@ -37,7 +37,7 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 \end{algorithm}
 
 
-Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi) y sea una posible solución. Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ (eliminando la solución), caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
+Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi) y sea una posible solución(generando de esta manera, todos los subconjuntos posibles). Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ (eliminando la solución), caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
 
 \subsection*{Análisis de Complejidad}
 Describiremos cada acción con su complejidad y luego realizaremos la suma total.
@@ -89,13 +89,6 @@ Por lo tanto, vemos que la complejidad total del algoritmo es de O($2^{n/2} * n$
 \subsection{Algoritmo de Programación Dinámica}
 La programación dinámica es un método para reducir el tiempo de ejecución de un algoritmo mediante la utilización de subproblemas superpuestos y subestructuras óptimas\footnote{Una subestructura óptima significa que se pueden usar soluciones óptimas de subproblemas para encontrar la solución óptima del problema en su conjunto.}.
  
-
-En general, se pueden resolver problemas con subestructuras óptimas siguiendo estos tres pasos:
-\begin{itemize}
-	\item Dividir el problema en subproblemas más pequeños.
-	\item Resolver estos problemas de manera óptima usando este proceso de tres pasos recursivamente.
-	\item Usar estas soluciones óptimas para construir una solución óptima al problema original.
-\end{itemize}
 Los subproblemas se resuelven a su vez dividiéndolos en subproblemas más pequeños hasta que se alcance el caso base, donde la solución al problema es trivial.
 
 
@@ -114,6 +107,9 @@ Ademas, la programación dinámica toma normalmente uno de los dos siguientes en
 \end{itemize}
 
 Para nuestro problema en particular podemos plantear la siguiente función matemática recursiva:
+\begin{equation*}
+f(i,j) = "el\ maximo\ beneficio\ obtenible\ dados\ i\ pedidos\ (con\ su\ respectivo\ peso\ y\ beneficio)\ y\ una\ mochila\ con\ capacidad\ j"
+\end{equation*}
 \begin{equation*}
 f(i,j) = \begin{cases} 
           0 & i = 0 \lor j = 0 \\
