@@ -144,35 +144,49 @@ Ademas, la programación dinámica toma normalmente uno de los dos siguientes en
 	\item Bottom-up: Todos los problemas que puedan ser necesarios se resuelven de antemano y después se usan para resolver las soluciones a problemas mayores. Este enfoque es ligeramente mejor en consumo de espacio y llamadas a funciones, pero a veces resulta poco intuitivo encontrar todos los subproblemas necesarios para resolver un problema dado.
 \end{itemize}
 
-Para nuestro problema en particular podemos plantear la siguiente función matemática recursiva:
-\begin{equation*}
 
+Para nuestro problema en particular podemos plantear la siguiente función matemática recursiva:
+
+\begin{equation*}
+f(i,j) = "el\ maximo\ beneficio\ obtenible\ dados\ i\ pedidos\ (con\ su\ respectivo\ peso\ y\ beneficio)\ y\ una\ mochila\ con\ capacidad\ j"
+\end{equation*}
+
+\begin{equation*}
+	f(i,j) = \begin{cases} 
           0 & i = 0 \lor j = 0 \\
           max(f(i-1,j), beneficio[i-1] + f(i-1, j-peso[i-1])) & peso[i-1] \leq j \\
           f(i-1, j) & en\ otro\ caso
        \end{cases}
 \end{equation*}
 
+Exhibimos el algoritmo propuesto para mostrar como hacemos uso de la técnica de memoizacion y no tener que recalcular valores anteriormente calculados.
+
 \begin{algorithm}
 \caption{Programacion Dinamica}\label{selection}
 \begin{algorithmic}[1]
 \Procedure{dp}{$vector \ \ pedidos, \ int \ \ w$}
 	\State $int \ dp[n+1][w+1]$
-   \For{\textbf{$i \gets 0$ to} $|pedidos|$}
-    \For{\textbf{$j \gets 0$ to} $w$}
-    \If{$i = 0\ \ j=0$}
-    	\State $dp[i][j] \gets 0$
-	\State $pi \gets pi\ +\ pedidos[j].peso$
-	\EndIf
-	\EndFor
-
-	\If{$wi \ > \ w$}
-	\State $pi \gets -1$
-	\EndIf
-
-	\State $subSets[i] \gets pi $
+   	\For{\textbf{$i \gets 0$ to} $|pedidos|$}
+    		\For{\textbf{$j \gets 0$ to} $w$}
+    			\If{$i = 0\ \ j=0$}
+    				\State $dp[i][j] \gets 0$
+    			
+    			\Else
+				\If{$pedidos[i-1].peso \leq j$}
+					\State $dp[i][j] \gets max(dp[i-1][j], pedidos[i-1].beneficio + dp[i-1][j-pedidos[i-1].peso])$
+				\Else
+					\State $dp[i][j] \gets dp[i-1][j]$
+				\EndIf
+			\EndIf
+		\EndFor
     \EndFor
-   	\State $Return \ \ maxElement(subSets)$
+   	\Return maxElement(subSets)
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+%				if(pedidos[i-1].first <= j){
+%					dp[i][j] = max(dp[i-1][j], pedidos[i-1].second + dp[i-1][j-pedidos[i-1].first]);
+%				}else{
+%					dp[i][j] = dp[i-1][j];
+%				}
