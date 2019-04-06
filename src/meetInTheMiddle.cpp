@@ -85,13 +85,22 @@ ll solveMiddle(vector<pll>& T1, vector<pll>& T2, ll& w)
 	sort(T2.begin(), T2.end(), [](auto &left, auto &right) {return left.second > right.second;});					//ordeno T2 segun el beneficio de mayor a menor
 	stable_sort(T2.begin(), T2.end(), [](auto &left, auto &right) {return left.first < right.first;});   	//ordeno T2 segun el peso de manera estable
 
+
 	T2 = filtrar(T2);			//filtramos los subcjtos de T2 que pesan mas que otros de valor mayor o igual
+
 
 	for(int i = 0; i < T1.size(); i++){
 		ll complemento = w-T1[i].first;
-		ll beneficio = binarySearch(T2, complemento);
-		beneficio += T1[i].second;
-		if(beneficio > res) res = beneficio;
+		if(complemento <= 0)
+		{
+			if(T1[i].second > res && T1[i].first <= w) res = T1[i].second;
+		}
+		else
+		{
+			ll beneficio = binarySearch(T2, complemento);
+			beneficio += T1[i].second;
+			if(beneficio > res) res = beneficio;
+		}
 	}
 
 	return res;
