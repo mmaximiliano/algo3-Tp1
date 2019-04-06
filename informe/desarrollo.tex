@@ -78,6 +78,9 @@ El siguiente pseudocódigo muestra como podemos obtener ésto facilmente:
 \end{algorithmic}
 \end{algorithm}
 
+Veamos bien como funciona el algoritmo. Las variables res y parcial representan a la solución final y a la solución parcial que estamos estudiando respectivamente, miesntras que índice es el elemento que tenemos que decidir si agregar o no a nuestro candidato. El llamado inicial va a tener a res y a parcial como los pares <0,0>, e índice comenzará en 0. El for recorre todos los elementos que quedan por visitar en un llamado dado (desde índice hasta el final del arreglo de pedidos). En este  ciclo, primero agregamos el elemento a nuestra solución parcial. Si ahora parcial es mejor que res, actualizamos res. Luego, realizamos el llamado recursivo aumentando el índice para recorrer los caminos que incluye al elemento i. Por último, sacamos al elemento i de parcial y continuamos con la próxima iteración, obteniendo así los caminos que no incluyen al elemento i.
+
+
 Analicemos la complejidad de éste algortimo. Como mencionamos antes, para cada elemento tenemos la decisión de incluirlo o no en nuestra solución parcial. Ésto nos lleva a obtener un árbol binario completo de altura igual a la cantidad de elementos. En otras palabras, tenemos $2^{n}$ caminos de longitud n. Para armar cada camino, fuimos agregando nodos con un costo de O(1), lo que deriva en un costo total de O($2^{n} * n$) para armar todo el árbol de backtracking.
 
 Sin embargo, ésta implementación no aprovecha el uso de podas para poder descartar rápidamente un conjunto de candidatos que no pueden ser la solución final. Para mejorar sobre ésto, vamos a utilizar dos tipos de podas:
