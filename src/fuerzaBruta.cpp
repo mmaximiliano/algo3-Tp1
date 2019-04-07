@@ -25,21 +25,23 @@ int main() {
 
 	vector<pll> pedidos(n);					// vector con los valores wi, pi
 	
-	ll wi, pi, maxPi;	
+	ll wi, pi;
+	ll maxPi = 0;	
 
-	for(int i = 0; i < n; i++)				// obtengo los valores wi, pi
+	for(ll i = 0; i < n; i++)				// obtengo los valores wi, pi
 	{	
 		cin>>wi>>pi;
 		pedidos[i] = make_pair(wi, pi);
 	}
 
-	vector<pll> subSets(1<<n);				// todos los subconjuntos
+	ll indice = 1;
+	indice = indice << n;
 
-	for(int i = 0; i < (1<<n); i++)			// armo los subconjuntos O(n2^n)
+	for(ll i = 0; i < indice; i++)			// armo los subconjuntos O(n2^n)
 	{
 		wi = 0;
 		pi = 0;
-		for(int j = 0; j < n; j++)
+		for(ll j = 0; j < n; j++)
 		{
 			if(i & (1<<j))
 			{
@@ -51,11 +53,9 @@ int main() {
 		{
 			pi = -1;
 		}
-		subSets[i] = make_pair(wi,pi);
+		maxPi = max(maxPi, pi);				//me quedo con el maximo hasta el momento
 	}
 
-	// obtengo maximo pi
-	maxPi = (*(max_element(subSets.begin(), subSets.end(), compPi))).second;
 	cout << maxPi << "\n";
 
 	return 0;
