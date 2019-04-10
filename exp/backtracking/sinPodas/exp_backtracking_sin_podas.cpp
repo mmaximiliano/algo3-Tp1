@@ -45,6 +45,7 @@ int main()
 	ll REPS = 30;
 	ll w = 25;
 	pll res = make_pair(0,0);
+	pll parcial = res;
 
     // Header del csv
     cout << "n,w,time,res" <<endl; 
@@ -74,13 +75,14 @@ int main()
 		for(int rep = 0; rep < REPS; ++rep) {
 			//reinicio res y parcial
 			res = make_pair(0,0);
-			pll parcial = res;
+			parcial = res;
 
             auto time_start = std::chrono::steady_clock::now();    
             
             solveBacktracking(res, parcial, 0, pedidos, w);
 
             auto time_end = std::chrono::steady_clock::now();
+            
             ll time_fb = std::chrono::duration_cast<std::chrono::nanoseconds>(time_end - time_start).count();
 
             total_fb += time_fb;
