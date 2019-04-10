@@ -48,7 +48,7 @@ int main()
 	ll res = 0;
 
     // Header del csv
-    cout << "n,w,time" <<endl; 
+    cout << "n,w,time,res" <<endl; 
 	
 	for(ll n = 0; n < 50; n+=2) {
 
@@ -89,7 +89,7 @@ int main()
 		total_fb /= REPS;
 
 		// Escribo a stdout, podria escribir directamente en un archivo especifico
-        cout << n << "," << w << "," << total_fb  << "\n";
+        cout << n << "," << w << "," << total_fb  << ","<< res << "\n";
 	}
 
 
