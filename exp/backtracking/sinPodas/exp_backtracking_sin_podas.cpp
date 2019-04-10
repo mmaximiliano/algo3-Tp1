@@ -50,7 +50,7 @@ int main()
     // Header del csv
     cout << "n,w,time,res" <<endl; 
 	
-	for(ll n = 0; n < 26; n+=2) {
+	for(ll n = 0; n < 30; n+=2) {
 
 		ll total_fb = 0;
 		//creo vector de n posiciones
@@ -82,7 +82,7 @@ int main()
             solveBacktracking(res, parcial, 0, pedidos, w);
 
             auto time_end = std::chrono::steady_clock::now();
-            
+
             ll time_fb = std::chrono::duration_cast<std::chrono::nanoseconds>(time_end - time_start).count();
 
             total_fb += time_fb;
