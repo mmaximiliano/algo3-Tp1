@@ -50,7 +50,7 @@ int main()
     // Header del csv
     cout << "n,w,time,res" <<endl; 
 	
-	for(ll n = 0; n < 50; n+=2) {
+	for(ll n = 0; n < 26; n+=2) {
 
 		ll total_fb = 0;
 		//creo vector de n posiciones
