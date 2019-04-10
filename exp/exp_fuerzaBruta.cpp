@@ -45,6 +45,7 @@ int main()
 {
 	ll REPS = 30;
 	ll w = 25;
+	ll res = 0;
 
     // Header del csv
     cout << "n,w,time" <<endl; 
@@ -76,7 +77,7 @@ int main()
 
             auto time_start = std::chrono::steady_clock::now();    
             
-            bruteForce(pedidos, n, w);
+            res = bruteForce(pedidos, n, w);
 
             auto time_end = std::chrono::steady_clock::now();
             ll time_fb = std::chrono::duration_cast<std::chrono::nanoseconds>(time_end - time_start).count();
