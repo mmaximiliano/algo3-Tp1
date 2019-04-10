@@ -13,31 +13,30 @@ using vi = vector<int>;
 using vll = vector<ll>;
 
 
-ll bruteForce(vector<pll> &pedidos, ll &n, ll &w){
-	ll maxPi = 0;
-	ll indice = 1;
-	ll wi,pi;
-	indice = indice << n;
-
-	for(ll i = 0; i < indice; i++)			// armo los subconjuntos O(n2^n)
+//SIN PODAS
+void solveBacktracking(pll& res, pll& parcial, int indice, vector<pll> &pedidos, ll w)
+{
+	for(int i = indice; i < pedidos.size(); i++)
 	{
-		wi = 0;
-		pi = 0;
-		for(ll j = 0; j < n; j++)
+		//incluyo pedidos[i] en la solucion
+		parcial.first += pedidos[i].first;
+		parcial.second += pedidos[i].second;
+
+		if(parcial.first <= w && parcial.second > res.second || parcial.second == res.second && parcial.first < res.first)
 		{
-			if(i & (1<<j))
-			{
-				wi += pedidos[j].first;		//sumo los pesos
-				pi += pedidos[j].second;	//sumo los beneficios
-			}
+			res.first = parcial.first;
+			res.second = parcial.second;
 		}
-		if (wi>w)
-		{
-			pi = -1;
-		}
-		maxPi = max(maxPi, pi);				//me quedo con el maximo hasta el momento
+
+		//pasamos al proximo elemento
+		solveBacktracking(res, parcial, i+1, pedidos, w);
+
+		//excluimos pedidos[i] de la solucion
+		parcial.first -= pedidos[i].first;
+		parcial.second -= pedidos[i].second;
 	}
-	return maxPi;
+
+	return;
 }
 
 
@@ -45,7 +44,7 @@ int main()
 {
 	ll REPS = 30;
 	ll w = 25;
-	ll res = 0;
+	pll res = make_pair(0,0);
 
     // Header del csv
     cout << "n,w,time,res" <<endl; 
@@ -57,7 +56,6 @@ int main()
 		vector<pll> pedidos(n);
 
 		ll wi, pi;
-		ll maxP = 0;	
 
 		//utilizo una distribucion uniforme
 		std::default_random_engine generator;
@@ -74,10 +72,13 @@ int main()
 
 
 		for(int rep = 0; rep < REPS; ++rep) {
+			//reinicio res y parcial
+			res = make_pair(0,0);
+			pll parcial = res;
 
             auto time_start = std::chrono::steady_clock::now();    
             
-            res = bruteForce(pedidos, n, w);
+            solveBacktracking(res, parcial, 0, pedidos, w);
 
             auto time_end = std::chrono::steady_clock::now();
             ll time_fb = std::chrono::duration_cast<std::chrono::nanoseconds>(time_end - time_start).count();
@@ -89,7 +90,7 @@ int main()
 		total_fb /= REPS;
 
 		// Escribo a stdout, podria escribir directamente en un archivo especifico
-        cout << n << "," << w << "," << total_fb  << ","<< res << "\n";
+        cout << n << "," << w << "," << total_fb  << ","<< res.second << "\n";
 	}
 
 
