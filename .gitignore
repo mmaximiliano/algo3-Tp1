@@ -47,3 +47,4 @@ src/dp
 *.out
 *.toc
 informe/informe.synctex.gz
+exp/dp/exp_dp

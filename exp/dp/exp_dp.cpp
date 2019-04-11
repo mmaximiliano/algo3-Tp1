@@ -21,17 +21,17 @@ int main()
     cout << "n,w,time,res" <<endl; 
 
     //fijo w
-	for (int w = 0; w < 30; w+=2)
+	for (int w = 0; w < 50; w++)
 	{
 		//vario n
-		for(int n = 0; n < 30; n+=2) {
+		for(int n = 0; n < 50; n++) {
 	
 			ll total_fb = 0;
 			//creo vector de n posiciones
-			vector<pll> pedidos(n);
+			vector<pii> pedidos(n);
 	
-			ll wi, pi;
-			ll maxP = 0;	
+			int wi, pi;
+			int res = 0;	
 	
 			//utilizo una distribucion uniforme
 			std::default_random_engine generator;
@@ -66,7 +66,8 @@ int main()
 						}
 					}
 				}
-	
+				res = dp[n][w];
+
 	            auto time_end = std::chrono::steady_clock::now();
 	            ll time_fb = std::chrono::duration_cast<std::chrono::nanoseconds>(time_end - time_start).count();
 	
@@ -77,7 +78,7 @@ int main()
 			total_fb /= REPS;
 	
 			// Escribo a stdout, podria escribir directamente en un archivo especifico
-	        cout << n << "," << w << "," << total_fb  << ","<< dp[n][w] << "\n";
+	        cout << n << "," << w << "," << total_fb  << ","<< res << "\n";
 		}
 	}
 
