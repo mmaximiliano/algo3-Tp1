@@ -3,7 +3,7 @@ import pandas as pd
 import seaborn as sns
 sns.set()
 
-df = pd.read_csv("times_fuerzaBruta_n30.csv")
+df = pd.read_csv("exp_dp_n50.csv")
 
 # Nano -> Milli
 df['time']  /= 1000000.0
