@@ -5,24 +5,24 @@ Una vez que obtuvimos los datos, comparamos nuestros resultados con las cotas as
 
 
 \subsection{Experimentación sobre el algoritmo de Fuerza Bruta}
-Para el algoritmo de Fuerza Bruta, comenzamos con un análisis del caso en el que no aplicamos ninguna poda. Como vimos en la sección anterior, tenemos una cota teórica de O($n*2^{n}$). Para ver que tan bien se ajusta nuestro algoritmo a ésta cota, generamos nuestros casos de test variando N entre 0 y 30. Veamos los resultados:
+Para el algoritmo de Fuerza Bruta, notamos que no importa el valor de la instancia pues siempre calculamos todo el espacio de soluciones, lo que si importa es su tamaño. Como vimos en la sección anterior, tenemos una cota teórica de O($n*2^{n}$). Para ver que tan bien se ajusta nuestro algoritmo a ésta cota, experimentamos generando instancias aleatorias variando N entre 0 y 30. Veamos los resultados:
 
 \begin{figure}[!htb]
    \begin{minipage}{0.6\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/sinPodas1}
+     \includegraphics[width=1\linewidth]{img/fb_1}
      \caption{Comparación del gráfico de los resultados contra la cota teórica}
    \end{minipage}\hfill
    \begin{minipage}{0.6\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/sinPodas2}
+     \includegraphics[width=1\linewidth]{img/fb_2}
      \caption{Correlación entre algoritmo y cota teórica}
    \end{minipage}
 \end{figure}
 
-Como podemos observar en el primer gráfico, podemos observar que la cota teórica tiene un crecimiento un poco más acelerado que nuestros datos. Esto es un resultado que nos sorprende, ya que como vimos antes, la complejidad de éste algoritmo se puede calcular de manera sencilla. Creemos que esta diferencia puede deberse a que no fue posible experimentar demasiados valores de N, dado que el tiempo de ejecución no nos lo permitió.
+En el primer gráfico podemos observar que la cota teórica se ajusta bien a el tiempo calculado y difiere mínimamente. Podemos considerar que esto se debe a constantes menores que puede tener el algoritmo con respecto a la cota superior calculada, pero sin embargo, esta diferencia también puede deberse a que no fue posible experimentar con valores grandes de N, dado que el tiempo de ejecución no nos lo permitió.
 \newline
-Ésta misma diferencia se ve plasmada en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle.
+Ésta pequeña diferencia se la puede observar en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota.
 
 \subsection{Experimentación sobre el algoritmo de Meet in the Middle}
 
@@ -65,32 +65,3 @@ Para el algoritmo de backtracking, comenzamos con un análisis del caso en el qu
 Como podemos observar en el primer gráfico, podemos observar que la cota teórica tiene un crecimiento un poco más acelerado que nuestros datos. Esto es un resultado que nos sorprende, ya que como vimos antes, la complejidad de éste algoritmo se puede calcular de manera sencilla. Creemos que esta diferencia puede deberse a que no fue posible experimentar demasiados valores de N, dado que el tiempo de ejecución no nos lo permitió.
 \newline
 Ésta misma diferencia se ve plasmada en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle.
-
-\bigskip
-
-Pasemos a ver que sucede cuando agregamos las podas. En este caso, quisimos comparar que sucedía tanto en el mejor caso como en el peor caso de una entrada dada. Es decir, dado un conjunto de elementos de entrada, las formas en la que más podamos y la que menos. Para lograr esto, variamos N en un rango de 0 a 50, y en cada caso ordenamos los elementos de distinta manera:
-\begin{itemize}
-\item Para lograr el mejor caso, ordenamos los elementos de mayor a menor respecto al peso y al beneficio. Este orden se debe a que, por un lado, podamos cuando nos pasamos del peso límite W. Por este motivo, poner los elementos más pesados al principio hace que podemos más rápidamente. Por otro lado, podamos cuando la suma de todos los beneficios que quedan no es suficiente para alcanzar a nuestra mejor solución hasta el momento. Así, tener los beneficios más bajos al final minimiza esta suma, logrando que podemos antes.
-\item Para lograr el peor caso, usamos el orden opuesto, es decir, ordenamos de menor a mayor respecto al peso y al beneficio. Esto nos lleva al peor caso por los motivos opuestos a los recién mencionados.
-\end{itemize}
-
-Veamos como se comparan en un gráfico:
-
-%ACA IRIA UN GRAFICO PEOR VS MEJOR%
-
-Por otro lado, queremos ver como se ajusta el algoritmo de backtracking con podas a nuestra cota teórica:
-
-\begin{figure}[!htb]
-   \begin{minipage}{0.6\textwidth}
-     \centering
-     \includegraphics[width=1\linewidth]{img/mejor_Figure_1}
-     \caption{Comparación del gráfico de los resultados contra la cota teórica}
-   \end{minipage}\hfill
-   \begin{minipage}{0.6\textwidth}
-     \centering
-     \includegraphics[width=1\linewidth]{img/mejor_Figure_2}
-     \caption{Correlación entre algoritmo y cota teórica}
-   \end{minipage}
-\end{figure}
-
-A partir de ambos gráficos podemos conjeturar que en el caso de backtracking con podas, no tenemos una buena correlación entre los datos y la cota teórica. Ésto se debe a que en todos nuestros casos aleatoriamente generados, el algoritmo logra podar una gran cantidad de ramas del árbol de backtracking. Sin embargo ésto no quiere decir que la cota no sea ajustada. Podríamos encontrar un cierto conjunto de datos de entrada que hagan que el algoritmo no haga ninguna poda, y en esos casos los resultados serían muy similares a los del análisis de backtracking sin podas. Por ejemplo, si la suma total de los pesos nunca sobrepasa al límite W, nunca realizaríamos nuestra poda por factibildad. Más aún, si el conjunto que contiene a todos los elementos es el último que revisamos, tampoco realizaríamos nuestra poda por optimalidad.
