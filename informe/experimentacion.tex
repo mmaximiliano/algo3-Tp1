@@ -8,12 +8,12 @@ Una vez que obtuvimos los datos, comparamos nuestros resultados con las cotas as
 Para el algoritmo de Fuerza Bruta, notamos que no importa el valor de la instancia pues siempre calculamos todo el espacio de soluciones, lo que si importa es su tamaño. Como vimos en la sección anterior, tenemos una cota teórica de O($n*2^{n}$). Para ver que tan bien se ajusta nuestro algoritmo a ésta cota, experimentamos generando instancias aleatorias variando N entre 0 y 30. Veamos los resultados:
 
 \begin{figure}[!htb]
-   \begin{minipage}{0.6\textwidth}
+   \begin{minipage}{0.5\textwidth}
      \centering
      \includegraphics[width=1\linewidth]{img/fb_1}
      \caption{Comparación del gráfico de los resultados contra la cota teórica}
    \end{minipage}\hfill
-   \begin{minipage}{0.6\textwidth}
+   \begin{minipage}{0.5\textwidth}
      \centering
      \includegraphics[width=1\linewidth]{img/fb_2}
      \caption{Correlación entre algoritmo y cota teórica}
@@ -100,13 +100,13 @@ A partir de ambos gráficos podemos conjeturar que en el caso de backtracking co
 Para el algoritmo de Programación Dinámica notamos, al igual que en el algoritmo de fuerza bruta, que no importa el valor de la instancia pues siempre recorremos todo la matriz, por lo tanto si importa tanto el valor de N como de W. Como vimos en la sección anterior, tenemos una cota teórica de O($NxW$). Para ver que tan bien se ajusta nuestro algoritmo a ésta cota, experimentamos generando instancias aleatorias variando N y W, ambos entre 0 y 50. Veamos los resultados:
 
 \begin{figure}[!htb]
-   \begin{minipage}{0.6\textwidth}
+   \begin{minipage}{1.0\textwidth}
      \centering
      \includegraphics[width=1\linewidth]{img/heatmap}
      \caption{tiempos del algoritmo correspondiente a los valores de N y W}
    \end{minipage}
 \end{figure}
 
-En el primer gráfico podemos observar que la cota teórica se ajusta bien a el tiempo calculado y difiere mínimamente. Podemos considerar que esto se debe a constantes menores que puede tener el algoritmo con respecto a la cota superior calculada, pero sin embargo, esta diferencia también puede deberse a que no fue posible experimentar con valores grandes de N, dado que el tiempo de ejecución no nos lo permitió.
+En el primer gráfico podemos observar como ambos valores (N y W) influyen en el tiempo de ejecución de nuestro algoritmo, ya que para valores grandes de ambos el algoritmo toma el mayor tiempo, y cuando alguno de los dos valores es chico el algoritmo toma poco tiempo.
 \newline
 Ésta pequeña diferencia se la puede observar en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota.
