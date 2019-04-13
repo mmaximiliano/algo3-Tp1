@@ -1,18 +1,31 @@
+import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 import seaborn as sns
+import pandas as pd
+import scipy.optimize as optimization
+from scipy.stats.stats import pearsonr
+import csv
+
+
 sns.set()
 
-df = pd.read_csv("exp_dp_n50.csv")
-
-# Nano -> Milli
-df['time']  /= 1000000.0
-df1 = df[['n','w']]
+def costo_PD(x,c):
+	return x*c
 
 
-#ax = df.plot('n', ['time'], marker='o', title='Comparación de tiempos - Dinámica')
-ax = sns.heatmap(df1 )
-#ax.set_xlabel('N')
-#ax.set_ylabel('Tiempos (ms)')
+PD_data = np.array(list(csv.reader(open("res_heat.csv", 'r')))).astype("float")
+tamEntrada= PD_data[0,1:].astype(int)
+tamMochila = PD_data[1:,0].astype(int)
 
-plt.show()
+tiemposPD = PD_data[1:,1:]
+
+df = pd.DataFrame(tiemposPD, index=tamMochila, columns=tamEntrada)
+
+fig, ax =plt.subplots()
+
+# Heatmap
+sns.heatmap(df,ax=ax, square=False)
+ax.set_xlabel("Cantidad de elementos")
+ax.set_ylabel("Capacidad de la mochila")
+plt.savefig("heatmap.pdf", bbox_inches='tight')
+plt.clf()
