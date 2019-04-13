@@ -4,12 +4,6 @@ import seaborn as sns
 import numpy as np
 sns.set()
 
-#grafico complejidad real
-x = np.arange(30)
-y = x*np.power(2,x)
-plt.plot(x,y)
-
-
 #grafico complejidad de exp
 df = pd.read_csv("times_fuerzaBruta_n30.csv")
 
