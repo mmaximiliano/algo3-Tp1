@@ -11,7 +11,7 @@ df = pd.read_csv("times_middle.csv")
 
 # Nano -> Milli
 df['time']  /= 1000000.0
-df['teorica'] = 0.001*df['n'] * 2**(df['n'] / 2.0) 
+df['teorica'] = 0.00004*df['n'] * 2**(df['n'] / 2.0) 
 
 
 df.plot('n', ['time', 'teorica'])
