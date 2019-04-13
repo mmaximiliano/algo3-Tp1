@@ -7,9 +7,12 @@ df = pd.read_csv("times_backtraking_sin_podas.csv")
 
 # Nano -> Milli
 df['time']  /= 1000000.0
+df['teorica'] = 0.001*df['n'] * 2**(df['n'])
 
-ax = df.plot('n', ['time'], marker='o', title='Comparación de tiempos - Meet In The Middle')
-ax.set_xlabel('N')
-ax.set_ylabel('Tiempos (ms)')
+df.plot('n', ['time', 'teorica'])
+
+ax1 = sns.lmplot(x='time', y='teorica', data=df);
+plt.xlabel("T(n)");
+plt.ylabel("cota(n)");
 
 plt.show()
