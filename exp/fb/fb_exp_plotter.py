@@ -9,7 +9,7 @@ df = pd.read_csv("times_fuerzaBruta_n30.csv")
 
 # Nano -> Milli
 df['time']  /= 1000000.0
-df['teorica'] = 0.000007*df['n'] * 2**(df['n'])
+df['teorica'] = 0.001*df['n'] * 2**(df['n'])
 
 df.plot('n', ['time', 'teorica'])
 
