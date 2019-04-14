@@ -1,0 +1,21 @@
+\section{Introducción}
+En este trabajo estamos a cargo de distribuir los pedidos al supermercado de la flamante unicornio Gloppi Ya entre sus compradores, de manera de poder maximizar el beneficio obtenido. Cada pedido será asignado a uno de nuestros compradores, quien se encargará de armarlos, pagarlos y entregarlos a los enviadores. Nuestro objetivo es hacer esta asignación eficientemente de manera de poder satisfacer a mas clientes con los recursos que tenemos. Para lograrlo, vamos a pensar a cada pedido como dos valores de interés, su tamaño Wi, y su beneficio Bi. Por lo tanto, el tamaño de un pedido consistirá en la suma de los artículos que tiene un pedido, ya que éste número representa el tiempo que le tomará a un comprador realizar la compra en el supermercado.
+Por lo tanto, dados todos los pedidos para un horario en particular, nuestra tarea es ver como asignarlos a la flota de compradores para poder sacar el mayor beneficio posible. Si nos abstraemos, podemos ver que este problema se reduce a un caso particular del Problema de Multiples Mochilas. Es decir, el problema de dados un conjunto de elementos con un tamaño y un beneficio, asignarlos a un conjunto de contenedores. La resolución de éste problema es compleja, por lo que vamos a realizar una aproximación. En lugar de asignar los pedidos a todos los compradores, vamos a tomar compradores uno a uno, de manera sucesiva. Primero le asignaremos pedidos al primer comprador de la mejor manera posible. Luego, con los elementos que sobraron, hacemos lo mismo con el segundo, y así sucesivamente.
+De esta manera, nuestro problema pasa a consistir en que, dado un conjunto de elementos que tienen un peso y un beneficio, asignarlos a un solo comprador de la manera más eficiente. Éste problema es conocido como el Problema de la Mochila. 
+Veamos algunos ejemplos:
+
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=0.8\linewidth]{img/intro}
+\end{figure}
+
+En este informe, estudiaremos cuatro técnicas algorítmicas distintas para lla resolución de éste problema, a saber:
+\begin{itemize}
+\item Fuerza Bruta
+\item Backtracking
+\item Meet in the Middle
+\item Programación Dinámica
+\end{itemize}
+
+Luego de implementar los 4 algoritmos, veremos sus complejidades, cuán buena es su performance cuando se enfrentan a casos reales, y veremos cómo se comparan entre ellos.
+\label{sec:introduccion}
