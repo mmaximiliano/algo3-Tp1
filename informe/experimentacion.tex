@@ -62,7 +62,7 @@ Para el algoritmo de backtracking, comenzamos con un análisis del caso en el qu
    \end{minipage}
 \end{figure}
 
-Como podemos observar en el primer gráfico, podemos observar que la cota teórica tiene un crecimiento un poco más acelerado que nuestros datos. Esto es un resultado que nos sorprende, ya que como vimos antes, la complejidad de éste algoritmo se puede calcular de manera sencilla. Creemos que esta diferencia puede deberse a que no fue posible experimentar demasiados valores de N, dado que el tiempo de ejecución no nos lo permitió.
+Como podemos observar en el primer gráfico, la cota teórica tiene un crecimiento un poco más acelerado que nuestros datos. Esto es un resultado que nos sorprende, ya que como vimos antes, la complejidad de éste algoritmo se puede calcular de manera sencilla. Creemos que esta diferencia puede deberse a que no fue posible experimentar demasiados valores de N, dado que el tiempo de ejecución no nos lo permitió.
 \newline
 Ésta misma diferencia se ve plasmada en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle.
 
@@ -76,7 +76,16 @@ Pasemos a ver que sucede cuando agregamos las podas. En este caso, quisimos comp
 
 Veamos como se comparan en un gráfico:
 
-%ACA IRIA UN GRAFICO PEOR VS MEJOR%
+
+\begin{figure}[!htb]
+   \begin{minipage}{0.8\textwidth}
+     \centering
+     \includegraphics[width=0.7\linewidth]{img/mejor_peor_1}
+     \caption{mejor vs peor caso}
+   \end{minipage}
+\end{figure}
+
+Para realizar este gráfico, corrimos ambos casos variando n entre 0 y 100. Como podemos observar, la diferencia entre ambos es abismal. Ésto nos habla de la importancia que tiene encontrar buenas podas para los algoritmos de backtracking, ya que en la práctica son las podas las que los diferencian de otros algoritmos de fuerza bruta. Para darnos una idea númerica, cuando N=5, el peor caso tarda 53 veces más que el mejor, y cuando N=96 tarda 363 veces más.
 
 Por otro lado, queremos ver como se ajusta el algoritmo de backtracking con podas a nuestra cota teórica:
 
@@ -121,4 +130,3 @@ En el primer gráfico podemos observar como ambos valores (N y W) influyen en el
      \caption{Correlación entre algoritmo y cota teórica con $w=25$}
    \end{minipage}
 \end{figure}
-
