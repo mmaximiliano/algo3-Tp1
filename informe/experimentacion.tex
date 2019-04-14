@@ -31,12 +31,12 @@ En el caso de Meet in the Middle, variamos N en un rango de 0 a 50, y comparamos
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/Middle1}
+     \includegraphics[width=0.9\linewidth]{img/Middle1}
      \caption{Comparación del gráfico de los resultados contra la cota teórica}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/Middle2}
+     \includegraphics[width=0.9\linewidth]{img/Middle2}
      \caption{Correlación entre algoritmo y cota teórica}
    \end{minipage}
 \end{figure}
@@ -52,12 +52,12 @@ Para el algoritmo de backtracking, comenzamos con un análisis del caso en el qu
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/sinPodas1}
+     \includegraphics[width=0.9\linewidth]{img/sinPodas1}
      \caption{Comparación del gráfico de los resultados contra la cota teórica}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/sinPodas2}
+     \includegraphics[width=0.9\linewidth]{img/sinPodas2}
      \caption{Correlación entre algoritmo y cota teórica}
    \end{minipage}
 \end{figure}
@@ -90,12 +90,12 @@ Por otro lado, queremos ver como se ajusta el algoritmo de backtracking con poda
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/mejor_Figure_1}
+     \includegraphics[width=0.9\linewidth]{img/mejor_Figure_1}
      \caption{Comparación del gráfico de los resultados contra la cota teórica}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/mejor_Figure_2}
+     \includegraphics[width=0.9\linewidth]{img/mejor_Figure_2}
      \caption{Correlación entre algoritmo y cota teórica}
    \end{minipage}
 \end{figure}
@@ -133,19 +133,19 @@ A su vez, para poder verificar que nuestro algoritmo corre en tiempo lineal cuan
 
 
 Como podemos observar en el primer gráfico, el tiempo de ejecución del algoritmo se encuentra acotado superiormente por una función lineal, lo cual verifica nuestra hipótesis inicial, ya que al fijar una variable el tiempo solo aumenta linealmente en función de la variable $N$. Para corroborar esto de nuevo, planteamos un segundo gráfico que muestra la correlación entre el algoritmo y la cota teórica propuesta. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle. Más específicamente, el coeficiente de correlación de Pearson en este caso fue de 0.9804304907022177 que, como vimos en el gráfico, es una correlación positiva fuerte, pero más débil que en la mayoría de los otros algorítmos calculados.
-
+\newpage
 \subsection{Comparacion entre Fuerza Bruta y backtracking sin podas}
 Tanto el algoritmo de Fuerza Bruta como el de Backtracking sin podas tienen la misma complejidad, O($n*2^{n}$). Veamos como se comparan empíricamente:
 
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/fb_vs_bt_1}
+     \includegraphics[width=0.9\linewidth]{img/fb_vs_bt_1}
      \caption{Comparación entre la complejidad de los algoritmos}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/fb_vs_bt_2}
+     \includegraphics[width=0.9\linewidth]{img/fb_vs_bt_2}
      \caption{Correlación entre las complejidades de los algoritmos}
    \end{minipage}
 \end{figure}
@@ -158,12 +158,12 @@ Comparemos ahora el algoritmo de Fuerza Bruta con uno de  mejor complejidad, Mee
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/fb_vs_middle_1}
+     \includegraphics[width=0.9\linewidth]{img/fb_vs_middle_1}
      \caption{Comparación entre la complejidad de los algoritmos}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/fb_vs_middle_2}
+     \includegraphics[width=0.9\linewidth]{img/fb_vs_middle_2}
      \caption{Correlación entre las complejidades de los algoritmos}
    \end{minipage}
 \end{figure}
