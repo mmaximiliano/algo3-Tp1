@@ -107,16 +107,18 @@ A partir de ambos gráficos podemos conjeturar que en el caso de backtracking co
 
 \subsection{Experimentación sobre el algoritmo de Programación Dinámica}
 Para el algoritmo de Programación Dinámica notamos, al igual que en el algoritmo de fuerza bruta, que no importa el valor de la instancia pues siempre recorremos todo la matriz, por lo tanto si importa tanto el valor de N como de W. Como vimos en la sección anterior, tenemos una cota teórica de O($NxW$). Para ver que tan bien se ajusta nuestro algoritmo a ésta cota, experimentamos generando instancias aleatorias variando N y W, ambos entre 0 y 50. Veamos los resultados:
+\begin{center}
 
 \begin{figure}[H]
-   \begin{minipage}{0.8\textwidth}
      \centering
-     \includegraphics[width=1\linewidth]{img/heatmap}
+     \includegraphics[width=0.5\linewidth]{img/heatmap}
      \caption{tiempos del algoritmo correspondiente a los valores de N y W}
-   \end{minipage}
 \end{figure}
 
-En el primer gráfico podemos observar como ambos valores (N y W) influyen en el tiempo de ejecución de nuestro algoritmo, ya que para valores grandes de ambos el algoritmo toma el mayor tiempo, y cuando alguno de los dos valores es chico el algoritmo toma poco tiempo.
+\end{center}
+En el heatmap podemos observar como ambos valores (N y W) influyen en el tiempo de ejecución de nuestro algoritmo, ya que para valores grandes de ambos el algoritmo toma el mayor tiempo, y cuando alguno de los dos valores es chico el algoritmo toma poco tiempo.
+
+A su vez, para poder verificar que nuestro algoritmo corre en tiempo lineal cuando una de las dos variables esta fija, realizamos el experimento de fijar una variable (en este caso $w=25$) y variar la otra variable ($n$) y ver el tiempo que toma el algoritmo. Veamos los resultados:
 
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
@@ -130,3 +132,6 @@ En el primer gráfico podemos observar como ambos valores (N y W) influyen en el
      \caption{Correlación entre algoritmo y cota teórica con $w=25$}
    \end{minipage}
 \end{figure}
+
+
+Como podemos observar en el primer gráfico 
