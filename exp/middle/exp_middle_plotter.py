@@ -16,6 +16,10 @@ df['teorica'] = 0.00004*df['n'] * 2**(df['n'] / 2.0)
 
 df.plot('n', ['time', 'teorica'])
 
+r = np.corrcoef(df['time'], df['teorica'])[0,1]
+print(r)
+#out: r = 0.9999865200267454
+
 ax1 = sns.lmplot(x='time', y='teorica', data=df);
 plt.xlabel("T(n)");
 plt.ylabel("cota(n)");

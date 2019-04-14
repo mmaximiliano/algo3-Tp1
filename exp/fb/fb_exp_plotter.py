@@ -11,6 +11,11 @@ df = pd.read_csv("times_fuerzaBruta_n30.csv")
 df['time']  /= 1000000.0
 df['teorica'] = 0.000007*df['n'] * 2**(df['n'])
 
+r = np.corrcoef(df['time'], df['teorica'])[0,1]
+print(r)
+# out: r = 0.9999204732522591
+
+
 df.plot('n', ['time', 'teorica'])
 
 ax1 = sns.lmplot(x='time', y='teorica', data=df);

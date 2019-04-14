@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import numpy as np
 sns.set()
 
 df = pd.read_csv("times_bt_podas_mejor_caso.csv")
@@ -13,6 +14,9 @@ df['peor'] = df_p['time']
 
 df.plot('n', ['time', 'peor'], title='Mejor vs Peor')
 
+r = np.corrcoef(df['time'], df['peor'])[0,1]
+print(r)
+#out: r = 0.9366349410059747
 
 ax1 = sns.lmplot(x='time', y='peor', data=df);
 plt.xlabel("N");
