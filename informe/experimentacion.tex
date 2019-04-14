@@ -22,7 +22,7 @@ Para el algoritmo de Fuerza Bruta, notamos que no importa el valor de la instanc
 
 En el primer gráfico podemos observar que la cota teórica se ajusta bien a el tiempo calculado y difiere mínimamente. Podemos considerar que esto se debe a constantes menores que puede tener el algoritmo con respecto a la cota superior calculada, pero sin embargo, esta diferencia también puede deberse a que no fue posible experimentar con valores grandes de N, dado que el tiempo de ejecución no nos lo permitió.
 \newline
-Ésta pequeña diferencia se la puede observar en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota.
+Ésta pequeña diferencia se la puede observar en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota. Cálculando el coeficiente de correlación de Pearson, obtenemos un resultado de 0.9999204732522591, lo que nos confirma que los datos tienen una relación positiva casi perfecta.
 
 \subsection{Experimentación sobre el algoritmo de Meet in the Middle}
 
@@ -41,7 +41,7 @@ En el caso de Meet in the Middle, variamos N en un rango de 0 a 50, y comparamos
    \end{minipage}
 \end{figure}
 
-Como podemos observar en el primer gráfico, parecería ser que el tiempo de ejecución se ajusta fuertemente a la cota teórica. Ambas funciones parecen tener un crecimiento similar, pero podemos corroborar esto más apropiadamente con el segundo gráfico. Aquí, vemos que nuestros datos tienen una correlación positiva casi perfecta con la cota teórica. La recta de cuadrados mínimos cubre casi perfectamente a nuestros datos.
+Como podemos observar en el primer gráfico, parecería ser que el tiempo de ejecución se ajusta fuertemente a la cota teórica. Ambas funciones parecen tener un crecimiento similar, pero podemos corroborar esto más apropiadamente con el segundo gráfico. Aquí, vemos que nuestros datos tienen una correlación positiva casi perfecta con la cota teórica ya que la recta de cuadrados mínimos cubre casi perfectamente a nuestros datos. Para corroborar, calculamos el coeficiente de correlación de Pearson y obtuvimos un resultado de 0.9999865200267454, confirmando que nuestros datos tienen una relación positiva casi perfecta con la cota teórica.
 \label{sec:experimentacion}
 
 
@@ -64,7 +64,7 @@ Para el algoritmo de backtracking, comenzamos con un análisis del caso en el qu
 
 Como podemos observar en el primer gráfico, la cota teórica tiene un crecimiento un poco más acelerado que nuestros datos. Esto es un resultado que nos sorprende, ya que como vimos antes, la complejidad de éste algoritmo se puede calcular de manera sencilla. Creemos que esta diferencia puede deberse a que no fue posible experimentar demasiados valores de N, dado que el tiempo de ejecución no nos lo permitió.
 \newline
-Ésta misma diferencia se ve plasmada en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle.
+Ésta misma diferencia se ve plasmada en el segundo gráfico. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle. En particular, obtuvimos un coeficiente de correlación de Pearson de 0.9997870087191989, que parece indicar una correlación más fuerte que la que sugiere el gráfico.
 
 \bigskip
 
@@ -100,7 +100,7 @@ Por otro lado, queremos ver como se ajusta el algoritmo de backtracking con poda
    \end{minipage}
 \end{figure}
 
-A partir de ambos gráficos podemos conjeturar que en el caso de backtracking con podas, no tenemos una buena correlación entre los datos y la cota teórica. Ésto se debe a que en todos nuestros casos aleatoriamente generados, el algoritmo logra podar una gran cantidad de ramas del árbol de backtracking. Sin embargo ésto no quiere decir que la cota no sea ajustada. Podríamos encontrar un cierto conjunto de datos de entrada que hagan que el algoritmo no haga ninguna poda, y en esos casos los resultados serían muy similares a los del análisis de backtracking sin podas. Por ejemplo, si la suma total de los pesos nunca sobrepasa al límite W, nunca realizaríamos nuestra poda por factibildad. Más aún, si el conjunto que contiene a todos los elementos es el último que revisamos, tampoco realizaríamos nuestra poda por optimalidad.
+A partir de ambos gráficos podemos conjeturar que en el caso de backtracking con podas, no tenemos una buena correlación entre los datos y la cota teórica. En particular, el coeficiente de correlación de Pearson en este caso es de -0.09510266610231015, lo que parece indicar que prácticamente no hay correlación entre los datos y la cota teórica. Ésto se debe a que en todos nuestros casos aleatoriamente generados, el algoritmo logra podar una gran cantidad de ramas del árbol de backtracking. Sin embargo ésto no quiere decir que la cota no sea ajustada. Podríamos encontrar un cierto conjunto de datos de entrada que hagan que el algoritmo no haga ninguna poda, y en esos casos los resultados serían muy similares a los del análisis de backtracking sin podas. Por ejemplo, si la suma total de los pesos nunca sobrepasa al límite W, nunca realizaríamos nuestra poda por factibildad. Más aún, si el conjunto que contiene a todos los elementos es el último que revisamos, tampoco realizaríamos nuestra poda por optimalidad.
 
 
 \subsection{Experimentación sobre el algoritmo de Programación Dinámica}
@@ -132,7 +132,7 @@ A su vez, para poder verificar que nuestro algoritmo corre en tiempo lineal cuan
 \end{figure}
 
 
-Como podemos observar en el primer gráfico, el tiempo de ejecución del algoritmo se encuentra acotado superiormente por una función lineal, lo cual verifica nuestra hipótesis inicial, ya que al fijar una variable el tiempo solo aumenta linealmente en función de la variable $N$. Para corroborar esto de nuevo, planteamos un segundo gráfico que muestra la correlación entre el algoritmo y la cota teórica propuesta. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle.
+Como podemos observar en el primer gráfico, el tiempo de ejecución del algoritmo se encuentra acotado superiormente por una función lineal, lo cual verifica nuestra hipótesis inicial, ya que al fijar una variable el tiempo solo aumenta linealmente en función de la variable $N$. Para corroborar esto de nuevo, planteamos un segundo gráfico que muestra la correlación entre el algoritmo y la cota teórica propuesta. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle. Más específicamente, el coeficiente de correlación de Pearson en este caso fue de 0.9804304907022177 que, como vimos en el gráfico, es una correlación positiva fuerte, pero más débil que en la mayoría de los otros algorítmos calculados.
 
 
 \subsection*{Comparacion entre Fuerza Bruta y Meet in the Middle}
