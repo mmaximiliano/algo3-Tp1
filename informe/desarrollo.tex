@@ -31,7 +31,9 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 
 	\State $subSets[i] \gets pi $
     \EndFor
-   	\State $Return \ \ maxElement(subSets)$
+    
+    
+   	\Return{$maxElement(subSets)$}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -39,8 +41,7 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 
 Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi) y sea una posible solución(generando de esta manera, todos los subconjuntos posibles). Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ (eliminando la solución), caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
 
-\subsection*{Análisis de Complejidad}
-Describiremos cada acción con su complejidad y luego realizaremos la suma total.
+Con respecto al Análisis de Complejidad temporal, describiremos cada acción con su complejidad y luego realizaremos la suma total.
 
 
 Complejidad de calcular la suma de todos los elementos de los $2^{n}$ posibles subconjuntos de pedidos que pueden llegar a ser a lo sumo de longitud n = O($n*2^{n}$).
@@ -199,11 +200,13 @@ Exhibimos el algoritmo propuesto basado en el enfoque bottom-up para mostrar com
 			\EndIf
 		\EndFor
     \EndFor
+    
+    
    	\Return{$dp[n][w]$}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-\subsection*{Análisis de Complejidad}
-Al iniciar nuestro algoritmo, creamos una matriz de $nxW$ lo que nos da una complejidad de $O(nxW)$.
+
+Analisemos la complejidad del algoritmo propuesto. Al iniciar, creamos una matriz de $nxW$ lo que nos da una complejidad de $O(nxW)$.
 Luego, podemos ver en el algoritmo que tenemos dos ciclos for anidados, uno que cicla desde 0 hasta n (la cantidad de pedidos) y otro que cicla desde 0 hasta w (el peso de la mochila). Estos ciclos sirven para ir recorriendo nuestra matriz de $nxW$, en donde cada para cada valor de la matriz que no este calculado, este se calcula una única vez y luego se accede al mismo en $O(1)$ para posteriores accesos. Para calcular el mismo, solo se requiere elementos que ya se encuentran calculados debido a la manera en la que recorremos la matriz, por lo tanto se toma el máximo entre ambos, siendo esta operacion $O(1)$. Finalmente, la suma de complejidades nos da $O(nxW)$.
