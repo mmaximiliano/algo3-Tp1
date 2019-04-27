@@ -31,8 +31,8 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 
 	\State $subSets[i] \gets pi $
     \EndFor
-    
-    
+
+
    	\Return{$maxElement(subSets)$}
 \EndProcedure
 \end{algorithmic}
@@ -126,7 +126,11 @@ Para implementar el paso 3) hacemos lo siguiente:
 
 \bigskip
 
-Por lo tanto, vemos que la complejidad total del algoritmo es de O($2^{n/2} * n$).
+Por lo tanto, vemos que la complejidad total del algoritmo es de O($2^{n/2} * n$). \\
+
+Por último, veamos por qué éste algoritmo es correcto. En primer lugar, es fácil ver que combinando subconjuntos de ambas mitades, podemos generar todos los subconjuntos del conjunto original. Centremosnos en por qué al filtrar una de las mitades, no estamos descartando a la solución del problema. Como ya mencionamos, descartamos los subconjuntos de la segunda mitad cuyo peso es mayor al de otros con beneficio mayor o igual. Supongamos que uno de estos subconjuntos descartados pertenece a la solución final del problema. Llamemoslo S. \\
+Tomemos entonces nuestra solución final, e intercambiemos S por un subconjunto de elementos con menor peso, y beneficio mayor o igual. Esto nos deja con una solución válida, cuyo beneficio es mayor o igual a nuestra solución final. Por lo tanto, descartar S no hubiese alterado nuestra respuesta final. \\
+Por lo tanto, vemos que podemos generar todos los subconjuntos posibles, y que sólo estamos descartando subconjuntos que no alteran el resultado del algoritmo.
 
 \subsection{Algoritmo de Programación Dinámica}
 La programación dinámica es un método para reducir el tiempo de ejecución de un algoritmo mediante la utilización de subproblemas superpuestos y subestructuras óptimas\footnote{Una subestructura óptima significa que se pueden usar soluciones óptimas de subproblemas para encontrar la solución óptima del problema en su conjunto.}.
@@ -156,7 +160,7 @@ $f(i,j) =$ el maximo beneficio obtenible dados i pedidos (con su respectivo peso
 
 
 \begin{equation*}
-	f(i,j) = \begin{cases} 
+	f(i,j) = \begin{cases}
           0 & i = 0 \lor j = 0 \\
           max(f(i-1,j), beneficio[i-1] + f(i-1, j-peso[i-1])) & peso[i-1] \leq j \\
           f(i-1, j) & en\ otro\ caso
@@ -190,7 +194,7 @@ Exhibimos el algoritmo propuesto basado en el enfoque bottom-up para mostrar com
     		\For{\textbf{$j \gets 0$ to} $w$}
     			\If{$i = 0\ \lor \ j=0$}
     				\State $dp[i][j] \gets 0$
-    			
+
     			\Else
 				\If{$pedidos[i-1].peso \leq j$}
 					\State $dp[i][j] \gets max(dp[i-1][j], pedidos[i-1].beneficio + dp[i-1][j-pedidos[i-1].peso])$
@@ -200,8 +204,8 @@ Exhibimos el algoritmo propuesto basado en el enfoque bottom-up para mostrar com
 			\EndIf
 		\EndFor
     \EndFor
-    
-    
+
+
    	\Return{$dp[n][w]$}
 \EndProcedure
 \end{algorithmic}
