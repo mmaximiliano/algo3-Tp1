@@ -3,12 +3,14 @@
 
 \subsection{Algoritmo de Fuerza Bruta}
 
-En ciencias de la computación, la técnica de búsqueda por fuerza bruta o búsqueda exhaustiva, también conocida como generate and test (generar y probar), es una forma muy general de resolver problemas y un paradigma de algoritmos que consiste en enumerar sistemáticamente todos los posibles candidatos a ser solución y luego chequear si cada candidato satisface o no el enunciado del problema. \footnote{$https://es.wikipedia.org/wiki/B\%C3\%BAsqueda\_de\_fuerza\_bruta$}
+En ciencias de la computación, la técnica de búsqueda por fuerza bruta o búsqueda exhaustiva, también conocida como generate and test (generar y probar), es una forma muy general de resolver problemas y un paradigma de algoritmos que consiste en enumerar sistemáticamente todos los posibles candidatos a ser solución y luego chequear si cada candidato satisface o no el enunciado del problema. \footnote{$http://faculty.simpson.edu/lydia.sinapova/www/cmsc360/LNotes/L05-BruteForce.htm$}
 
 En nuestro problema "Problema de la Mochila (Gloppi Ya)"  dado un conjunto de pedidos con un peso y beneficio asociado y una mochila de capacidad fija, la solución consiste en el subconjunto de pedidos que maximice la suma de beneficios y a su vez no supere la capacidad de la mochila.
 
-Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibles soluciones al problema y luego chequear si satisfacen el enunciado. Para ello, generaremos todos los subconjuntos de pedidos (posibles soluciones) y luego nos quedaremos con aquel que maximice la suma de beneficios y a su vez quepa en la mochila.
+Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibles soluciones al problema y luego chequear si satisfacen el enunciado. Para ello, generaremos todos los subconjuntos de pedidos (posibles soluciones) y luego nos quedaremos con aquel que maximice la suma de beneficios y a su vez quepa en la mochila. De esta manera siempre encontramos la solución, pues generamos todo el espacio de soluciones y nos quedamos con la mejor.
 
+Para generar todos los subconjuntos posibles de un conjunto de $n$ elementos (espacio de soluciones), podemos observar lo siguiente: Notemos que podemos codificar a cada subconjunto con un numero binario de n bits (cantidad de elementos), en donde el i-esimo bit es $0$ si el elemento en la posición i-esima no pertenece al subconjunto y $1$ en caso contrario.
+De esta manera podemos codificar los $2^{n}$ subconjuntos del conjunto de $n$ elementos, ya que con un numero binario de $n$ dígitos se pueden representar $2^{n}$ números.
 
 \begin{algorithm}
 \caption{Fuerza Bruta}\label{selection}
@@ -39,7 +41,11 @@ Siguiendo nuestro paradigma de resolución, deberíamos generar todas las posibl
 \end{algorithm}
 
 
-Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos. Dentro de este ciclo haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits de $2^{n}$), y en el cual usaremos a la variable j como un numero binario, fijándonos que bits están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi) y sea una posible solución(generando de esta manera, todos los subconjuntos posibles). Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ (eliminando la solución), caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
+Al comienzo de nuestra solución propuesta hacemos un ciclo el cual ira desde $1$ hasta $2^{n}$, es decir desde 1 hasta la cantidad de subconjuntos (de esta manera veremos todos los subconjuntos posibles) utilizando a la variable i como un numero de $n$ bits (luego verificaremos que bits están seteados en $1$). 
+Para lograr esto, haremos otro ciclo en n, la cantidad de elementos del conjunto (véase también como la cantidad de bits necesarios para representar $2^{n}$ números), en el cual chequearemos que bits de la variable i están en 1 para tener en cuenta esas posiciones del vector pedidos (considerando ese elemento para el subconjunto) para sumar su beneficio y peso (correspondientemente acumulado en las variables wi y pi), generando de esta manera, todos los subconjuntos posibles. 
+
+
+Finalmente nos preguntamos si la suma de los elementos considerados supera la capacidad de la mochila, de ser así seteamos su beneficio en $-1$ (eliminando la solución), caso contrario almacenamos el beneficio total en el vector subSets. Y por ultimo retornamos el elemento de mayor valor del vector subSets, siendo este el mayor beneficio obtenible.
 
 Con respecto al Análisis de Complejidad temporal, describiremos cada acción con su complejidad y luego realizaremos la suma total.
 
