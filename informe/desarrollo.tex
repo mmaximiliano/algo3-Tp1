@@ -162,8 +162,24 @@ Ademas, la programación dinámica toma normalmente uno de los dos siguientes en
 	\item Bottom-up: Todos los problemas que puedan ser necesarios se resuelven de antemano y después se usan para resolver las soluciones a problemas mayores. Este enfoque es ligeramente mejor en consumo de espacio y llamadas a funciones, pero a veces resulta poco intuitivo encontrar todos los subproblemas necesarios para resolver un problema dado.
 \end{itemize}
 
+Para ver que es correcto aplicar programación dinámica en nuestro problema, debemos ver que el problema de la mochila cumple con subproblemas de estructura optima y solapamiento de problemas:
+\begin{enumerate}
+	\item \textit{Sub-estructura optima:} Al considerar todos los subconjuntos de elementos, para cada elemento tenemos dos casos: $(a)$ el elemento no esta incluido en el conjunto optimo, $(b)$ el elemento esta incluido en el conjunto optimo.
+	Por lo tanto, el \textbf{valor máximo} que se puede obtener de $n$ artículos es el \textbf{máximo entre los dos valores siguientes}:
+	\begin{enumerate}
+		\item \textbf{Valor máximo} obtenido por los $n-1$ artículos restantes y capacidad $W$ (excluyendo el artículo n).
+		\item Valor del artículo $n$ más el \textbf{valor máximo} obtenido por los $n-1$ artículos restantes y capacidad $W$ menos el peso del artículo $n$ (incluyendo el artículo n).
+	\end{enumerate}
+	Si el peso del n-esimo articulo es mayor que $W$, entonces el n-esimo articulo no puede ser incluido y el primer caso es la única posibilidad.
+	De esta manera vemos que la solución optima del problema involucra soluciones optimas de los subproblemas.
+	
+	\item \textit{Solapamiento de problemas:} Siguiendo la estructura recursiva mencionada anteriormente podemos observar que a lo sumo realizamos $O(nxW)$ llamdos recursivos, cuando en realidad tenemos que evaluar $2^{n}$ conjuntos, por lo tanto tenemos solapamiento de subproblemas (en el caso en que $W \in o(2^{n})$).
+	%revisar!!!
 
-Para nuestro problema en particular podemos plantear la siguiente función matemática recursiva:
+\end{enumerate}
+
+
+Siguiendo lo anteriormente dicho podemos plantear la siguiente función matemática recursiva, que resuelve el problema por lo anteriormente detallado:
 
 
 $f(i,j) =$ el maximo beneficio obtenible dados i pedidos (con su respectivo peso y beneficio) y una mochila con capacidad j
