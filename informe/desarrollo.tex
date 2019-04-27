@@ -93,6 +93,8 @@ Sin embargo, ésta implementación no aprovecha el uso de podas para poder desca
 
 Notemos que ninguna de estas podas agrega complejidad a nuestro algoritmo original. Para implementar la poda por factibilidad, alcanza con hacer un chequeo de si nuestro peso parcial es mayor al límite W antes de hacer el llamado recursivo. Por otro lado, si mantenemos una variable con la suma de los beneficios de todos los elementos que aún no visitamos, alcanza con que realizemos otro chequeo antes del llamado recursivo, y que vayamos decrementando el beneficio total en cada paso. Cada una de estas cosas tiene una complejidad de O(1).
 
+Como vimos antes, el algoritmo de backtracking sin podas genera todos los subconjuntos posibles, y se queda con el que genera la mejor solución. Veamos que al agregar podas no estamos dejando de lado a la mejor solución del problema. En primer lugar, es fácil ver que la poda por factibilidad solamente desecha candidatos que no son válidos, ya que se exceden del límite de peso W. Por otro otro lado, la poda por optimalidad solo descarta a un candidato una vez que detecta que ya no es posible que logré un beneficio mejor que el de nuestra mejor solución parcial. De esta manera, solamente estamos ignorando ramas del árbol que no llevan a la solución del problema.
+
 
 \subsection{Algoritmo Meet in the Middle}
 
@@ -130,7 +132,7 @@ Por lo tanto, vemos que la complejidad total del algoritmo es de O($2^{n/2} * n$
 
 Por último, veamos por qué éste algoritmo es correcto. En primer lugar, es fácil ver que combinando subconjuntos de ambas mitades, podemos generar todos los subconjuntos del conjunto original. Centremosnos en por qué al filtrar una de las mitades, no estamos descartando a la solución del problema. Como ya mencionamos, descartamos los subconjuntos de la segunda mitad cuyo peso es mayor al de otros con beneficio mayor o igual. Supongamos que uno de estos subconjuntos descartados pertenece a la solución final del problema. Llamemoslo S.
 
-Tomemos entonces nuestra solución final, e intercambiemos S por un subconjunto de elementos con menor peso, y beneficio mayor o igual. Esto nos deja con una solución válida, cuyo beneficio es mayor o igual a nuestra solución final. Por lo tanto, descartar S no hubiese alterado nuestra respuesta final. 
+Tomemos entonces nuestra solución final, e intercambiemos S por un subconjunto de elementos con menor peso, y beneficio mayor o igual. Esto nos deja con una solución válida, cuyo beneficio es mayor o igual a nuestra solución final. Por lo tanto, descartar S no hubiese alterado nuestra respuesta final.
 
 Por lo tanto, vemos que podemos generar todos los subconjuntos posibles, y que sólo estamos descartando subconjuntos que no alteran el resultado del algoritmo.
 
