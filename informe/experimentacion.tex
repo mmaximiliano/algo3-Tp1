@@ -26,7 +26,7 @@ En el primer gráfico podemos observar que la cota teórica se ajusta bien a el 
 
 \subsection{Experimentación sobre el algoritmo de Meet in the Middle}
 
-En el caso de Meet in the Middle, variamos N (cantidad de elementos) entre 0 y 50 de manera aleatoria, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y 25 (siendo 25 la capacidad de la mochila). Finalmente comparamos nuestros resultados con la cota teórica O($n*2^{n/2}$). Los siguientes gráficos muestran nuestros resultados:
+En el caso de Meet in the Middle, variamos N (cantidad de elementos) entre 0 y 50, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y 25 (siendo 25 la capacidad de la mochila). Finalmente comparamos nuestros resultados con la cota teórica O($n*2^{n/2}$). Los siguientes gráficos muestran nuestros resultados:
 
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
@@ -104,7 +104,7 @@ A partir de ambos gráficos podemos conjeturar que en el caso de backtracking co
 
 
 \subsection{Experimentación sobre el algoritmo de Programación Dinámica}
-Para el algoritmo de Programación Dinámica notamos, al igual que en el algoritmo de fuerza bruta, que no importa el valor de la instancia pues siempre recorremos todo la matriz, por lo tanto si importa tanto el valor de N como de W. Como vimos en la sección anterior, tenemos una cota teórica de O($NxW$). Para ver que tan bien se ajusta nuestro algoritmo a ésta cota, experimentamos generando instancias aleatorias variando N y W con una distribución uniforme, ambos entre 0 y 50, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila). Veamos los resultados:
+Para el algoritmo de Programación Dinámica notamos, al igual que en el algoritmo de fuerza bruta, que no importa el valor de la instancia pues siempre recorremos todo la matriz, por lo tanto si importa tanto el valor de N como de W. Como vimos en la sección anterior, tenemos una cota teórica de O($NxW$). Para ver que tan bien se ajusta nuestro algoritmo a ésta cota, experimentamos generando instancias aleatorias variando N y W, ambos entre 0 y 50, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila). Veamos los resultados:
 \begin{center}
 
 \begin{figure}[H]
@@ -135,7 +135,8 @@ A su vez, para poder verificar que nuestro algoritmo corre en tiempo lineal cuan
 Como podemos observar en el primer gráfico, el tiempo de ejecución del algoritmo se encuentra acotado superiormente por una función lineal, lo cual verifica nuestra hipótesis inicial, ya que al fijar una variable el tiempo solo aumenta linealmente en función de la variable $N$. Para corroborar esto de nuevo, planteamos un segundo gráfico que muestra la correlación entre el algoritmo y la cota teórica propuesta. En este caso, podemos ver que nuestros datos tienen una correlación positiva con la cota que, aunque es bastante fuerte, no es tan ajustada como por ejemplo en el algoritmo de Meet in the Middle. Más específicamente, el coeficiente de correlación de Pearson en este caso fue de 0.9804304907022177 que, como vimos en el gráfico, es una correlación positiva fuerte, pero más débil que en la mayoría de los otros algorítmos calculados.
 \newpage
 \subsection{Comparacion entre Fuerza Bruta y backtracking sin podas}
-Tanto el algoritmo de Fuerza Bruta como el de Backtracking sin podas tienen la misma complejidad, O($n*2^{n}$). Veamos como se comparan empíricamente:
+Tanto el algoritmo de Fuerza Bruta como el de Backtracking sin podas tienen la misma complejidad, O($n*2^{n}$). Para generar las instancias variamos N (cantidad de elementos) entre 0 y 100, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila).
+Veamos como se comparan empíricamente:
 
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
@@ -153,7 +154,7 @@ Tanto el algoritmo de Fuerza Bruta como el de Backtracking sin podas tienen la m
 Como podemos ver, el algoritmo de Backtracking parece ser más rápido que el de Fuerza Bruta, aunque presentan una correlación positiva bastante fuerte.
 
 \subsection{Comparacion entre Fuerza Bruta y Meet in the Middle}
-Comparemos ahora el algoritmo de Fuerza Bruta con uno de  mejor complejidad, Meet in the Middle:
+Comparemos ahora el algoritmo de Fuerza Bruta con uno de  mejor complejidad, Meet in the Middle. Para generar las instancias variamos N (cantidad de elementos) entre 0 y 30, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila). 
 
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
@@ -170,18 +171,18 @@ Comparemos ahora el algoritmo de Fuerza Bruta con uno de  mejor complejidad, Mee
 
 En este caso, vemos como el algoritmo de Meet in the Middle es mucho más rápido que el de Fuerza Bruta. En el segundo gráfico, vemos como la recta de cuadrados mínimos tiene una pendiente muy pequeña, lo que nos estaría mostrando como el algoritmo de Fuerza Bruta crece tanto más rápido que el de Meet in the Middle.
 
-\subsection{Comparacion entre Programacion Dinamica y backtracking sin podas}
-
+\subsection{Comparacion entre Programación Dinámica y backtracking con podas}
+Comparemos ahora el algoritmo de Programación Dinámica con el de Backtracking con podas. Para generar las instancias, Como en el algoritmo de Programación Dinámica la complejidad también depende de la capacidad de la mochila primero fijamos $W = 100$ y luego $W = 10000$, variamos N (cantidad de elementos) entre 0 y 100, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila). 
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
      \centering
      \includegraphics[width=0.9\linewidth]{img/bt_dp_100_Figure_1}
-     \caption{Comparación entre la complejidad de los algoritmos}
+     \caption{Comparación entre la complejidad de los algoritmos con $W = 100$ }
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \centering
      \includegraphics[width=0.9\linewidth]{img/bt_dp_10000_Figure_1}
-     \caption{Comparación entre la complejidad de los algoritmos}
+     \caption{Comparación entre la complejidad de los algoritmos con $W = 10000$}
    \end{minipage}
 \end{figure}
 
