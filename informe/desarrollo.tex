@@ -167,8 +167,8 @@ Para ver que es correcto aplicar programación dinámica en nuestro problema, de
 	\item \textit{Sub-estructura optima:} Al considerar todos los subconjuntos de elementos, para cada elemento tenemos dos casos: $(a)$ el elemento no esta incluido en el conjunto optimo, $(b)$ el elemento esta incluido en el conjunto optimo.
 	Por lo tanto, el \textbf{valor máximo} que se puede obtener de $n$ artículos es el \textbf{máximo entre los dos valores siguientes}:
 	\begin{enumerate}
-		\item \textbf{Valor máximo} obtenido por los $n-1$ artículos restantes y capacidad $W$ (excluyendo el artículo n).
-		\item Valor del artículo $n$ más el \textbf{valor máximo} obtenido por los $n-1$ artículos restantes y capacidad $W$ menos el peso del artículo $n$ (incluyendo el artículo n).
+		\item \underline{Excluyendo el artículo n}: \textbf{Valor máximo} obtenido por los $n-1$ artículos restantes y capacidad $W$ 
+		\item \underline{Incluyendo el artículo n}: Valor del artículo $n$ más el \textbf{valor máximo} obtenido por los $n-1$ artículos restantes y capacidad $W$ menos el peso del artículo $n$.
 	\end{enumerate}
 	Si el peso del n-esimo articulo es mayor que $W$, entonces el n-esimo articulo no puede ser incluido y el primer caso es la única posibilidad.
 	De esta manera vemos que la solución optima del problema involucra soluciones optimas de los subproblemas.
