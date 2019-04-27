@@ -128,8 +128,10 @@ Para implementar el paso 3) hacemos lo siguiente:
 
 Por lo tanto, vemos que la complejidad total del algoritmo es de O($2^{n/2} * n$). \\
 
-Por último, veamos por qué éste algoritmo es correcto. En primer lugar, es fácil ver que combinando subconjuntos de ambas mitades, podemos generar todos los subconjuntos del conjunto original. Centremosnos en por qué al filtrar una de las mitades, no estamos descartando a la solución del problema. Como ya mencionamos, descartamos los subconjuntos de la segunda mitad cuyo peso es mayor al de otros con beneficio mayor o igual. Supongamos que uno de estos subconjuntos descartados pertenece a la solución final del problema. Llamemoslo S. \\
-Tomemos entonces nuestra solución final, e intercambiemos S por un subconjunto de elementos con menor peso, y beneficio mayor o igual. Esto nos deja con una solución válida, cuyo beneficio es mayor o igual a nuestra solución final. Por lo tanto, descartar S no hubiese alterado nuestra respuesta final. \\
+Por último, veamos por qué éste algoritmo es correcto. En primer lugar, es fácil ver que combinando subconjuntos de ambas mitades, podemos generar todos los subconjuntos del conjunto original. Centremosnos en por qué al filtrar una de las mitades, no estamos descartando a la solución del problema. Como ya mencionamos, descartamos los subconjuntos de la segunda mitad cuyo peso es mayor al de otros con beneficio mayor o igual. Supongamos que uno de estos subconjuntos descartados pertenece a la solución final del problema. Llamemoslo S.
+
+Tomemos entonces nuestra solución final, e intercambiemos S por un subconjunto de elementos con menor peso, y beneficio mayor o igual. Esto nos deja con una solución válida, cuyo beneficio es mayor o igual a nuestra solución final. Por lo tanto, descartar S no hubiese alterado nuestra respuesta final. 
+
 Por lo tanto, vemos que podemos generar todos los subconjuntos posibles, y que sólo estamos descartando subconjuntos que no alteran el resultado del algoritmo.
 
 \subsection{Algoritmo de Programación Dinámica}
