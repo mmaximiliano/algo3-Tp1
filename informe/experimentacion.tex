@@ -154,7 +154,7 @@ Veamos como se comparan empíricamente:
 Como podemos ver, el algoritmo de Backtracking parece ser más rápido que el de Fuerza Bruta, aunque presentan una correlación positiva bastante fuerte.
 
 \subsection{Comparacion entre Fuerza Bruta y Meet in the Middle}
-Comparemos ahora el algoritmo de Fuerza Bruta con uno de  mejor complejidad, Meet in the Middle. Para generar las instancias variamos N (cantidad de elementos) entre 0 y 30, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila). 
+Comparemos ahora el algoritmo de Fuerza Bruta con uno de  mejor complejidad, Meet in the Middle. Para generar las instancias variamos N (cantidad de elementos) entre 0 y 30, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila).
 
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
@@ -172,7 +172,7 @@ Comparemos ahora el algoritmo de Fuerza Bruta con uno de  mejor complejidad, Mee
 En este caso, vemos como el algoritmo de Meet in the Middle es mucho más rápido que el de Fuerza Bruta. En el segundo gráfico, vemos como la recta de cuadrados mínimos tiene una pendiente muy pequeña, lo que nos estaría mostrando como el algoritmo de Fuerza Bruta crece tanto más rápido que el de Meet in the Middle.
 
 \subsection{Comparacion entre Programación Dinámica y backtracking con podas}
-Comparemos ahora el algoritmo de Programación Dinámica con el de Backtracking con podas. Para generar las instancias, Como en el algoritmo de Programación Dinámica la complejidad también depende de la capacidad de la mochila primero fijamos $W = 100$ y luego $W = 10000$, variamos N (cantidad de elementos) entre 0 y 100, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila). 
+Comparemos ahora el algoritmo de Programación Dinámica con el de Backtracking con podas. Para generar las instancias, Como en el algoritmo de Programación Dinámica la complejidad también depende de la capacidad de la mochila primero fijamos $W = 100$ y luego $W = 10000$, variamos N (cantidad de elementos) entre 0 y 100, y a cada elemento le asignamos de manera aleatoria, utilizando una distribución uniforme, un peso y un beneficio entre 1 y W (siendo W la capacidad de la mochila).
 \begin{figure}[H]
    \begin{minipage}{0.5\textwidth}
      \centering
@@ -186,5 +186,8 @@ Comparemos ahora el algoritmo de Programación Dinámica con el de Backtracking 
    \end{minipage}
 \end{figure}
 
+Como era de esperar, cuando W es más pequeño, el algoritmo de programación dinámica resulta ser mucho más rápido que el de backtracking. Sin embargo, observamos que cuando W es considerablemente mayor a la cantidad de elementos, el algoritmo de dinámica sale perdiendo, dado que su complejidad aumenta de manera significativa, mientras que el algoritmo de backtracking no se ve afectado.
 
+Por otro lado, en el segundo gráfico podemos observar el carácter lineal sobre la cantidad de elementos del algoritmo de programación dinámica, mientras que el algoritmo de backtracking tiene un crecimiento mucho más acelerado. Esto nos muestra que, aunque el W sea muy grande, si siguiesemos aumentando la cantidad de elementos, el tiempo de computo de backtracking sobrepasaría al de dinámica a partir de un punto.
 
+Podemos concluir entonces que ninguno de los dos algoritmos es mejor que el otro, y que puede resultar difícil tomar la decisión de cuál es el apropiado en cada caso. No es correcto, por ejemplo, pensar que cuando tenemos un W muy grande el algoritmo de dinámica va a ser peor ya que como mencionamos antes, existe un n a partir del cual el algoritmo de backtracking va a tener una peor performance. Es importante encontrar una relación entre W y la cantidad de elementos poniendo a prueba nuestros algoritmos con casos similares a los que vamos a tener realmente, y decidir con cuál algoritmo quedarnos en cada caso.
